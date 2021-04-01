@@ -1,10 +1,6 @@
 import '../App.css';
 import { auth, generateUserDocument,signInWithGoogle } from "../firebase";
-import axios from 'axios';
-import { HomePageInfoStripe } from '../components/homePageInfoStripe'
 import React, { useState } from 'react';
-import sectionsData from '../staticData/homePageSections.json'
-import { Route } from 'react-router';
 
 export default function SignupPage() {
     const [fullName, setFullName] = useState('');

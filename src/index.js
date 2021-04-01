@@ -7,11 +7,14 @@ import App from './App';
 import reducers from './reducers';
 import reportWebVitals from './reportWebVitals';
 
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={createStore(reducers)}>
-    <App />
-  </Provider>
+    
+        <App />
+      
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,8 +1,7 @@
 import '../App.css';
-import { auth, generateUserDocument , signInWithGoogle} from "../firebase";
+import { auth,signInWithGoogle} from "../firebase";
 import React, { useState } from 'react';
-import PasswordReset from './passwordReset'
-import {BrowserRouter,Switch,Route,Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 export default function SignupPage() {
     const [email, setEmail] = useState('');

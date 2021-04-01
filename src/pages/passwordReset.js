@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-// import { Link } from "@reach/router";
-import {BrowserRouter,Switch,Route,Link} from "react-router-dom";
-import { auth, generateUserDocument , signInWithGoogle} from "../firebase";
+import {Link} from "react-router-dom";
+import { auth} from "../firebase";
 
 
 const PasswordReset = () => {
@@ -57,6 +56,7 @@ const PasswordReset = () => {
           />
           <button
             className=""
+            onClick={sendResetEmail}
           >
             Send me a reset link
           </button>

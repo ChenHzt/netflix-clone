@@ -5,7 +5,7 @@ import HomePage from './pages/home'
 import Signup from './pages/signup' 
 import Login from './pages/login' 
 import PasswordReset from './pages/passwordReset' 
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 
 function App() {
   return (

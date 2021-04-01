@@ -1,13 +1,10 @@
 import '../App.css';
-// import {signup} from '../handleAuth'
-import axios from 'axios';
 import { HomePageInfoStripe } from '../components/homePageInfoStripe'
 import React, { useState } from 'react';
 import sectionsData from '../staticData/homePageSections.json'
-import {BrowserRouter,Switch,Route,Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 export default function HomePage() {
-    const [signUpMail, setSignUpMail] = useState('');
     return (
         <div className="homePage">
             <div className="navbar">
@@ -17,7 +14,6 @@ export default function HomePage() {
                 <div className="navbar__right">
                     <Link to='/signup'>Sign Up</Link>
                     <Link to='/login'>Login</Link>
-                    {/* <button className="">Login</button> */}
                 </div>
             </div>
             <div className="jumbotron">
@@ -33,7 +29,6 @@ export default function HomePage() {
                 </div>
             </div>
             <div className="flex-container">
-                {/* <hr className='horizontal-divider' /> */}
                 <div className="homePageInfoSectionsContainer">
                     {
                         sectionsData.map((section) =>

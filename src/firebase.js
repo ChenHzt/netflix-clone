@@ -59,3 +59,11 @@ export const generateUserDocument = async (user, additionalData) => {
   export const signInWithGoogle = () => {
     auth.signInWithPopup(provider);
   };
+
+  auth.onAuthStateChanged(function(user) {
+    if (user) {
+      // User is signed in.
+    } else {
+      // No user is signed in.
+    }
+  });
