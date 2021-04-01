@@ -1,10 +1,10 @@
 import '../App.css';
-
+// import {signup} from '../handleAuth'
 import axios from 'axios';
 import { HomePageInfoStripe } from '../components/homePageInfoStripe'
 import React, { useState } from 'react';
 import sectionsData from '../staticData/homePageSections.json'
-import { Route } from 'react-router';
+import {BrowserRouter,Switch,Route,Link} from "react-router-dom";
 
 export default function HomePage() {
     const [signUpMail, setSignUpMail] = useState('');
@@ -15,8 +15,9 @@ export default function HomePage() {
                    <img src="../images/logo.png" alt=""/>
                 </div>
                 <div className="navbar__right">
-                    <button className="">Signup</button>
-                    <button className="">Login</button>
+                    <Link to='/signup'>Sign Up</Link>
+                    <Link to='/login'>Login</Link>
+                    {/* <button className="">Login</button> */}
                 </div>
             </div>
             <div className="jumbotron">

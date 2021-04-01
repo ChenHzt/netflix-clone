@@ -38,35 +38,7 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-  <!-- The core Firebase JS SDK is always required and must be listed first -->
-  <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-firestore.js"></script>
-
-  <!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-  <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-analytics.js"></script>
-
-  <script>
-    // Your web app's Firebase configuration
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-    var firebaseConfig = {
-      apiKey: "AIzaSyAHj5nlNvTLeDUqbqudhbTojAHUubj7D_Q",
-      authDomain: "netflix-clone-1cd5a.firebaseapp.com",
-      projectId: "netflix-clone-1cd5a",
-      storageBucket: "netflix-clone-1cd5a.appspot.com",
-      messagingSenderId: "831444820015",
-      appId: "1:831444820015:web:d30f7a135c1bfc674c66da",
-      measurementId: "G-6RR0R0V0KD"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-
-    const auth = firebase.auth();
-    const db = firebase.firestore();
-    db.settings({ timestampsInSnapshots: true })
-    firebase.analytics();
-  </script>
+  
 </body>
 
 </html>
