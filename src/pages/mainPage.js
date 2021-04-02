@@ -7,8 +7,6 @@ import { auth,signInWithGoogle} from "../firebase";
 import ProfilePage from './profiles'
 function MainPage({user,profile}) {
 
-    console.log(user);
-
     return (
         <div className="mainPage">
             {!profile && <ProfilePage/>}
@@ -19,7 +17,7 @@ function MainPage({user,profile}) {
 }
 
 const mapStateToProps = state => {
-    return { user: state.currentUser };
+    return { user: state.currentUser,profile:state.currentProfile };
   };
   
 export default connect(mapStateToProps)(MainPage);

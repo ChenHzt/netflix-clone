@@ -5,31 +5,45 @@ import { auth, firestore, getCurrentUserData } from "../firebase";
 import { connect } from 'react-redux';
 import {currentProfile} from '../actions'
 
-function ProfilesPage({user,profile}) {
+class ProfilesPage extends React.Component {
+    // constructor(props){
+    //     super(props);
+    //     // this.
+    // }
+    // chooseProfile = (p) => {
+    //     console.log(p);
+    //     currentProfile(p);
+    //     console.log(this.props.profile);
+    // }
 
-    const renderProfile = (p) =>{
+    renderProfile = (p) =>{
+        console.log(p);
+        const setProfile = this.props.currentProfile;
         return (
-            <div key={p.name} onClick={() => currentProfile(p)} className="profileCard">
+            <Link to='' key={p.name} onClick={() => setProfile(p) } className="profileCard">
                 <img src={p.imageUrl} alt="profile"/>
                 <p>{p.name}</p>
-            </div>
+            </Link>
         )
     }
 
-    const renderProfilesList = () => {
+    renderProfilesList = () => {
         return (
             <div className="profilesContainer">
-                {user.profiles.map(renderProfile)}
+                {this.props.user.profiles.map(this.renderProfile)}
             </div>
         )
     }
-    console.log(user);
-    return (
+    
+    render(){
+        console.log(this.props);
+        return (
         
-        <div className="profilesPage">
-            {renderProfilesList()}
-        </div>
-    )
+            <div className="profilesPage">
+                {this.renderProfilesList()}
+            </div>
+        )
+    }
 }
 
 const mapStateToProps = state => {
