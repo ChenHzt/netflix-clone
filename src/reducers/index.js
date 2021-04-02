@@ -8,6 +8,14 @@ const currentUserReducer = (currentUser = null, action) => {
     return currentUser;
   };
 
+const currentProfileReducer = (currentProfile = null, action) => {
+    if (action.type === 'CURRENT_PROFILE') {
+      return action.payload;
+    }
+  
+    return currentProfile;
+  };
+
   export default combineReducers({
     currentUser: currentUserReducer
   });

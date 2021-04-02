@@ -9,11 +9,12 @@ export default function SignupPage() {
     const [error, setError] = useState(null);
 
     const signInWithEmailAndPasswordHandler =(event) => {
-        event.preventDefault();
+        // event.preventDefault();
         auth.signInWithEmailAndPassword(email, password).catch(error => {
           setError("Error signing in with password and email!");
           console.error("Error signing in with password and email", error);
         });
+        console.log('dededede')
     };
 
     const onChangeInput = (event) => {
@@ -49,8 +50,8 @@ export default function SignupPage() {
                     <input name='password' value={password} onChange={onChangeInput} type="password" />
                 </div>
 
-                <button onClick={signInWithEmailAndPasswordHandler}>Login</button>
-                <button onClick={signInWithGoogle} >Login With Google</button>
+                <Link to='' onClick={signInWithEmailAndPasswordHandler}>Login</Link>
+                <Link to='' onClick={signInWithGoogle} >Login With Google</Link>
 
                 <p className="text-center my-3">
                     Don't have an account?
