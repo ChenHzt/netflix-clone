@@ -6,18 +6,8 @@ import { connect } from 'react-redux';
 import {currentProfile} from '../actions'
 
 class ProfilesPage extends React.Component {
-    // constructor(props){
-    //     super(props);
-    //     // this.
-    // }
-    // chooseProfile = (p) => {
-    //     console.log(p);
-    //     currentProfile(p);
-    //     console.log(this.props.profile);
-    // }
 
     renderProfile = (p) =>{
-        console.log(p);
         const setProfile = this.props.currentProfile;
         return (
             <Link to='' key={p.name} onClick={() => setProfile(p) } className="profileCard">
@@ -36,7 +26,6 @@ class ProfilesPage extends React.Component {
     }
     
     render(){
-        console.log(this.props);
         return (
         
             <div className="profilesPage">

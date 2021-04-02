@@ -19,13 +19,11 @@ class App extends React.Component {
   componentDidMount() {
     auth.onAuthStateChanged(async (userAuth) => {
       const currentUserData = await getCurrentUserData();
-      console.log(currentUserData);
       this.props.currentUser(currentUserData);
     });
   }
 
   render() {
-    console.log(this.props);
     return (
       <BrowserRouter>
         {this.props.user
@@ -51,4 +49,3 @@ export default connect(
 )(App);
 
 
-// export default ;

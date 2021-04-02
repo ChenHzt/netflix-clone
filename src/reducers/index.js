@@ -1,8 +1,6 @@
 import { combineReducers } from 'redux';
 
 const currentUserReducer = (currentUser = null, action) => {
-  console.log(currentUser,action);
-
     if (action.type === 'CURRENT_USER') {
       return action.payload;
     }
@@ -11,7 +9,6 @@ const currentUserReducer = (currentUser = null, action) => {
   };
 
 const currentProfileReducer = (currentProfile = null, action) => {
-  console.log(currentProfile,action);
     if (action.type === 'CURRENT_PROFILE') {
       return action.payload;
     }
@@ -19,7 +16,16 @@ const currentProfileReducer = (currentProfile = null, action) => {
     return currentProfile;
   };
 
+const popularMoviesReducer = (popularMovies = [], action) => {
+    if (action.type === 'POPULAR_MOVIES') {
+      return action.payload;
+    }
+  
+    return popularMovies;
+  };
+
   export default combineReducers({
     currentUser: currentUserReducer,
     currentProfile: currentProfileReducer,
+    popularMovies: popularMoviesReducer
   });

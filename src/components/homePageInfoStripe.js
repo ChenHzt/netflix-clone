@@ -3,7 +3,6 @@ import axios from 'axios';
 import React, { useState } from 'react';
 
 export function HomePageInfoStripe({ headline, info, videoUrl, direction }) {
-    console.log(direction);
     return (
             <div style={{flexDirection:direction}} className={`homePageInfoSection`}>
                 <div className="homePageInfoSection__text">

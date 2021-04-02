@@ -32,8 +32,8 @@ export default function HomePage() {
                 <div className="homePageInfoSectionsContainer">
                     {
                         sectionsData.map((section) =>
-                            <>
-                                <div key={section.id}>
+                            <div key={section.id}>
+                                <div >
                                     <HomePageInfoStripe
                                         headline={section.headline}
                                         info={section.info}
@@ -42,7 +42,7 @@ export default function HomePage() {
                                     />
                                 </div>
                                 <hr className='horizontal-divider' />
-                            </>
+                            </div>
                         )
                     }
                 </div>

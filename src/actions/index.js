@@ -14,3 +14,12 @@ export const currentProfile = profile => {
     payload: profile
   };
 };
+
+export const mostPopularMovies = movies => {
+  // Return an action
+  return {
+    type: 'POPULAR_MOVIES',
+    payload: movies
+  };
+};
+

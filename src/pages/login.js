@@ -14,7 +14,6 @@ export default function SignupPage() {
           setError("Error signing in with password and email!");
           console.error("Error signing in with password and email", error);
         });
-        console.log('dededede')
     };
 
     const onChangeInput = (event) => {
