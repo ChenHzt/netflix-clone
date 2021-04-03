@@ -1,31 +1,11 @@
 import { combineReducers } from 'redux';
+import {currentUserReducer,currentProfileReducer} from './authReducers'
+import {popularMoviesReducer, moviesByGenreReducer} from './moviesReducers'
 
-const currentUserReducer = (currentUser = null, action) => {
-    if (action.type === 'CURRENT_USER') {
-      return action.payload;
-    }
-  
-    return currentUser;
-  };
-
-const currentProfileReducer = (currentProfile = null, action) => {
-    if (action.type === 'CURRENT_PROFILE') {
-      return action.payload;
-    }
-  
-    return currentProfile;
-  };
-
-const popularMoviesReducer = (popularMovies = [], action) => {
-    if (action.type === 'POPULAR_MOVIES') {
-      return action.payload;
-    }
-  
-    return popularMovies;
-  };
 
   export default combineReducers({
     currentUser: currentUserReducer,
     currentProfile: currentProfileReducer,
-    popularMovies: popularMoviesReducer
+    popularMovies: popularMoviesReducer,
+    moviesByGenres: moviesByGenreReducer
   });

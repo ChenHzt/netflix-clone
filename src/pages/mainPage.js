@@ -2,18 +2,20 @@ import '../App.css';
 import React, { useState } from 'react';
 import axios from '../api/axios-tmdb';
 import { connect } from 'react-redux';
-import { auth, signInWithGoogle } from "../firebase";
+import { auth } from "../firebase";
 import ProfilePage from './profiles'
 import CardStripe from '../components/cardsStripe'
 import { mostPopularMovies } from '../actions';
+import { moviesByGenresAction } from '../actions';
+import tmbdGenres from '../staticData/homePageSections.json'
 
 class MainPage extends React.Component {
     componentDidMount = async () => {
-        const response = await axios.get('/discover/movie?api_key=2fccd7c26288d8a6ba121a000c6df8ec&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1');
-        this.props.mostPopularMovies(response.data.results);
+        this.props.mostPopularMovies();
+        this.props.moviesByGenresAction();
     }
     render() {
-        // console.log(this.props.popularMovies);
+        console.log(this.props.moviesByGenres);
         return (
             <div className="mainPage">
                 <div className="navbar__mainPage">
@@ -40,8 +42,9 @@ const mapStateToProps = state => {
     return {
         user: state.currentUser,
         profile: state.currentProfile,
-        popularMovies: state.popularMovies
+        popularMovies: state.popularMovies,
+        moviesByGenres:state.moviesByGenres
     };
 };
 
-export default connect(mapStateToProps, { mostPopularMovies })(MainPage);
+export default connect(mapStateToProps, { mostPopularMovies,moviesByGenresAction })(MainPage);

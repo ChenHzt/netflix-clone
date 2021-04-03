@@ -33,7 +33,6 @@ class App extends React.Component {
         <Route path="/signup" exact component={Signup} />
         <Route path="/login" exact component={Login} />
         <Route path="/passwordReset" exact component={PasswordReset} />
-        {/* <Route path="/profiles" exact component={ProfilesPage} /> */}
       </BrowserRouter>
     )
   }
