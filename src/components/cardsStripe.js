@@ -10,7 +10,7 @@ import Card from './card'
 export default function CardStripe({ title, movies }) {
 
     return (
-        <div className="stripe">
+        <div style={{margin:'40px 0'}} className="stripe">
             <p>{title}</p>
             <Splide options={{
                 perPage: 5,
@@ -19,7 +19,9 @@ export default function CardStripe({ title, movies }) {
                 type: 'loop',
             }}>
                 {
-                    movies.map(movie => <SplideSlide><Card movie={movie}/></SplideSlide>)
+                    movies
+                    .sort( () => 0.5 - Math.random())
+                    .map(movie => <SplideSlide><Card movie={movie}/></SplideSlide>)
                 }
             </Splide>
         </div>

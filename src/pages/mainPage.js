@@ -7,7 +7,6 @@ import ProfilePage from './profiles'
 import CardStripe from '../components/cardsStripe'
 import { mostPopularMovies } from '../actions';
 import { moviesByGenresAction } from '../actions';
-import tmbdGenres from '../staticData/homePageSections.json'
 
 class MainPage extends React.Component {
     componentDidMount = async () => {
@@ -27,9 +26,15 @@ class MainPage extends React.Component {
                     </ul>
                 </div>
                 <CardStripe movies={this.props.popularMovies} title="popular movies"></CardStripe>
-                <CardStripe movies={this.props.popularMovies} title="popular movies"></CardStripe>
-                <CardStripe movies={this.props.popularMovies} title="popular movies"></CardStripe>
-
+                {/* <CardStripe movies={this.props.popularMovies} title="popular movies"></CardStripe> */}
+                {/* <CardStripe movies={this.props.popularMovies} title="popular movies"></CardStripe> */}
+                {
+                    this.props.moviesByGenres
+                    .sort( () => 0.5 - Math.random())
+                    .map((movies) =>{
+                        return <CardStripe movies={movies.movies} title={`${movies.genre.name} movies`}></CardStripe>
+                    })
+                }
                 <button onClick={() => { auth.signOut() }}>SignOut</button>
                 {!this.props.profile && <ProfilePage />}
 

@@ -38,13 +38,10 @@ export const mostPopularMovies = () => async dispatch => {
 
 
 export const moviesByGenresAction = () => async dispatch => {
-  // const genreObj = tmbdGenres.genres.find((gen) => gen.name.toLowerCase()===genre);
-  // if(!genreObj) return null;
-  // const genreCode = genreObj.id;
 
   const movies = await Promise.all(tmbdGenres.genres.map(async (genre) => {
     const temp = {genre:{...genre}};
-    const response = await axios.get(`/discover/movie?api_key=${api_key}&language=en-US&sort_by=popularity.desc&page=1&with_genres=${genre.id}`);
+    const response = await axios.get(`/discover/movie?api_key=${api_key}&language=en-US&with_genres=${genre.id}`);
     temp.movies = response.data.results;
     return temp;
   }))
