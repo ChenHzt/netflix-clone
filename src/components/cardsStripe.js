@@ -8,18 +8,18 @@ import CardDetails from './cardDetails/cardDetails'
 export default function CardStripe({ title, movies }) {
 
     return (
-        <div style={{margin:'70px 0'}} className="stripe">
+        <div className="stripe" style={{height:'220px', margin:'20px'}}>
             <p>{title}</p>
-            <Splide options={{
-                perPage: 5,
+            <Splide style={{display:'flex', flexDirection:'column',alignItems:'center',overflow:'visible'}} options={{
                 perMove: 1,
+                autoWidth: true,
                 pagination: false,
                 type: 'loop',
             }}>
                 {
                     movies
                     .sort( () => 0.5 - Math.random())
-                    .map(movie => <SplideSlide><CardDetails movie={movie}/></SplideSlide>)
+                    .map(movie => <SplideSlide><CardDetails  movie={movie}/></SplideSlide>)
                 }
             </Splide>
         </div>

@@ -21,11 +21,17 @@ export const currentProfile = profile => {
 };
 
 export const mostPopularMovies = () => async dispatch => {
-  const response = await axios.get('/discover/movie?api_key=2fccd7c26288d8a6ba121a000c6df8ec&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1');
+  const response = await axios.get(`/discover/movie?api_key=${api_key}&language=en-US&sort_by=popularity.desc&include_adult=false&page=1`);
 
   dispatch({ type: 'POPULAR_MOVIES', payload: response.data.results });
 };
 
+export const currentDisplayedDetails = (id) => async dispatch => {
+  console.log('vbvbvbvbvb');
+  const response = await axios.get(`/movie/${id}?api_key=${api_key}&append_to_response=similar,videos,credits`);
+  console.log(response);
+  dispatch({ type: 'CURRENT_DISPLAYED_DETAILS', payload: response.data});
+} 
 
 
 // export const movieByGenre = (genre) => async dispatch => {
@@ -41,7 +47,7 @@ export const moviesByGenresAction = () => async dispatch => {
 
   const movies = await Promise.all(tmbdGenres.genres.map(async (genre) => {
     const temp = {genre:{...genre}};
-    const response = await axios.get(`/discover/movie?api_key=${api_key}&language=en-US&with_genres=${genre.id}`);
+    const response = await axios.get(`/discover/movie?api_key=${api_key}&language=en-US&include_video=true&with_genres=${genre.id}`);
     temp.movies = response.data.results;
     return temp;
   }))

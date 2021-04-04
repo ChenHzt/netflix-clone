@@ -24,3 +24,12 @@ export const popularMoviesReducer = (popularMovies = [], action) => {
     }
     return movies;
   };
+
+  
+  export const currentDisplayedDetailsReducer = (current = null, action) => {
+    if (action.type === 'CURRENT_DISPLAYED_DETAILS') {
+      return action.payload;
+    }
+    return current;
+  };
+
