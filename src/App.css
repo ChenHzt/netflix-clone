@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+.mainPage{
+  background-color: black;
+  color:white;
+}
+
 .homePage{
   background-color: rgb(0,0,0);
   color: white;

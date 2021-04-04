@@ -26,8 +26,7 @@ class MainPage extends React.Component {
                     </ul>
                 </div>
                 <CardStripe movies={this.props.popularMovies} title="popular movies"></CardStripe>
-                {/* <CardStripe movies={this.props.popularMovies} title="popular movies"></CardStripe> */}
-                {/* <CardStripe movies={this.props.popularMovies} title="popular movies"></CardStripe> */}
+                
                 {
                     this.props.moviesByGenres
                     .sort( () => 0.5 - Math.random())
