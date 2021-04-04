@@ -1,6 +1,6 @@
 export const currentUserReducer = (currentUser = null, action) => {
     if (action.type === 'CURRENT_USER') {
-      return action.payload;
+      return action.payload || null;
     }
   
     return currentUser;

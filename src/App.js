@@ -9,7 +9,7 @@ import PasswordReset from './pages/passwordReset'
 import MainPage from './pages/mainPage'
 import { BrowserRouter, Route } from "react-router-dom";
 // import  { } from 'react';
-import { auth, getCurrentUserData } from "./firebase";
+import { auth, getCurrentUserData,generateUserDocument } from "./firebase";
 import { connect } from 'react-redux';
 import { currentUser } from './actions';
 
@@ -18,7 +18,9 @@ class App extends React.Component {
 
   componentDidMount() {
     auth.onAuthStateChanged(async (userAuth) => {
+      userAuth && await generateUserDocument(userAuth, { fullName:userAuth.displayName })
       const currentUserData = await getCurrentUserData();
+      console.log(currentUserData);
       this.props.currentUser(currentUserData);
     });
   }

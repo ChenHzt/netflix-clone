@@ -10,7 +10,6 @@ export default function SignupPage() {
     const [error, setError] = useState(null);
 
     const createUserWithEmailAndPasswordHandler = async (event) => {
-        console.log('fefefe');
         event.preventDefault();
 
         try {
