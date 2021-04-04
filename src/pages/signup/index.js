@@ -1,6 +1,7 @@
 import { auth, generateUserDocument,signInWithGoogle } from "../../firebase";
 import React, { useState } from 'react';
 import {PageBackground,Box,Overlay,Headline,FormItem,Input,PrimaryBtn,SecondaryBtn} from './style';
+import {HorizontalRule,Logo,Navbar,NavRight,NavLink} from '../../style'
 
 export default function SignupPage() {
     const [fullName, setFullName] = useState('');
@@ -48,6 +49,10 @@ export default function SignupPage() {
 
     return (
         <PageBackground src='https://assets.nflxext.com/ffe/siteui/vlv3/92bb3a0b-7e91-40a0-b27b-f2c3ac9ef6e4/ab38bb40-7ffb-44a0-b628-90803ccd534b/IL-en-20210322-popsignuptwoweeks-perspective_alpha_website_small.jpg'>
+            <Navbar>
+                <Logo to='' src='http://assets.stickpng.com/images/580b57fcd9996e24bc43c529.png'/>
+                
+            </Navbar>
             <Overlay>
                 <Box>
                     <Headline>

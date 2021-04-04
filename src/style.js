@@ -32,7 +32,7 @@ export const HorizontalRule = styled.hr`
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.45));
 `
 
-export const Logo = styled.div`
+export const Logo = styled(Link)`
     width:150px;
     background:url('${props => props.src}') no-repeat center center/cover;
     height:100%;
