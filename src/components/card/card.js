@@ -1,5 +1,5 @@
 // import '../App.css';
-import { HomePageInfoStripe } from '../homePageInfoStripe'
+import { HomePageInfoStripe } from '../homePageInfoStripe/homePageInfoStripe'
 import React, { useState } from 'react';
 import sectionsData from '../../staticData/homePageSections.json'
 import {Link} from "react-router-dom";

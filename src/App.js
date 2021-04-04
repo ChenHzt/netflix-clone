@@ -1,7 +1,7 @@
 import './App.css';
 import axios from 'axios';
 import React, { useEffect } from 'react';
-import HomePage from './pages/home'
+import HomePage from './pages/home/home'
 import Signup from './pages/signup'
 import Login from './pages/login'
 import ProfilesPage from './pages/profiles'

@@ -4,28 +4,14 @@
   box-sizing: border-box;
 }
 
-::-webkit-scrollbar {
-  width: 0;  /* Remove scrollbar space */
-  background: transparent;  /* Optional: just make scrollbar invisible */
-}
-/* Optional: show position indicator in red */
-
-
-.mainPage{
-  background-color: black;
-  color:white;
-}
-
-.homePage{
+#root{
   background-color: #000000;
   color: white;
   overflow-x: hidden;
-  /* display: flex; */
-
 }
 
+
 .jumbotron{
-  position: absolute;
   height: 100vh;
   position: relative;
 }
@@ -87,11 +73,11 @@
   /* border: 1px solid white; */
 }
 
-.homePageInfoSectionsContainer{
+/* .homePageInfoSectionsContainer{
   width:80%;
   min-width: 600px;
   max-width: 1000px;
-}
+} */
 
 .flex-container{
   display: flex;
@@ -143,7 +129,7 @@
 }
 
 .splide__track{
-  overflow: visible !important;
+  overflow-y: visible !important;
 }
 
 .splide__arrow {
