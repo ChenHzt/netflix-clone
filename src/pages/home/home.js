@@ -1,4 +1,3 @@
-// import '../../App.css';
 import { HomePageInfoStripe } from '../../components/homePageInfoStripe/homePageInfoStripe'
 import React, { useState } from 'react';
 import sectionsData from '../../staticData/homePageSections.json'   

@@ -56,7 +56,7 @@ function CardDetails(props) {
                 preventScroll={false}
                 onRequestClose={closeModal}
                 style={customStyles}
-                contentLabel="Example Modal">
+                contentLabel="Movie details modal">
                 <MovieDetails movie={props.movie} />
             </Modal>}
         </Card>

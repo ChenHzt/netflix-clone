@@ -2,8 +2,8 @@ import './App.css';
 import axios from 'axios';
 import React, { useEffect } from 'react';
 import HomePage from './pages/home/home'
-import Signup from './pages/signup'
-import Login from './pages/login'
+import Signup from './pages/signup/index'
+import Login from './pages/login/index'
 import ProfilesPage from './pages/profiles'
 import PasswordReset from './pages/passwordReset'
 import MainPage from './pages/mainPage'
