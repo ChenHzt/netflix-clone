@@ -11,7 +11,9 @@
   min-height: 100vh;
 }
 
-
+.mainPage{
+  padding-top: 70px;
+}
 
 .card[data-image]{
   background-image: attr(data-image url);

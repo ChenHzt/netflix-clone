@@ -74,7 +74,6 @@ export const InputField = styled.input`
 `
 
 export const Input = (props) =>{
-    console.log(props);
     return (
         <CustomInput>
             <CustomInputLabel>{props.label}</CustomInputLabel>

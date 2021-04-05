@@ -4,6 +4,7 @@ import React from 'react';
 import HomePage from './pages/home/home'
 import Signup from './pages/signup/index'
 import Login from './pages/login/index'
+import SearchResultsPage from './pages/search/index'
 
 import PasswordReset from './pages/passwordReset'
 import MainPage from './pages/mainPage'
@@ -12,6 +13,7 @@ import { BrowserRouter, Route,Redirect } from "react-router-dom";
 import { auth, getCurrentUserData,generateUserDocument } from "./firebase";
 import { connect } from 'react-redux';
 import { currentUser } from './actions';
+import Navbar from './components/navbar/navbar';
 
 
 class App extends React.Component {
@@ -22,20 +24,26 @@ class App extends React.Component {
 
   componentDidMount() {
     auth.onAuthStateChanged(async (userAuth) => {
-      console.log('hhhhhh');
       userAuth && await generateUserDocument(userAuth, { fullName:userAuth.displayName })
       const currentUserData = await getCurrentUserData();
-      console.log(currentUserData);
       this.props.currentUser(currentUserData);
       this.setState({hide:false});
     });
   }
 
+  onSearchChange() {
+    
+  }
+
+  handleSignout(){
+    auth.signOut();
+    sessionStorage.removeItem('currentProfile');
+  }
+
   render() {
-    console.log(this.props.user);
     return (
       <BrowserRouter>
-      {console.log(this.props.user)}
+      <Navbar handleSignout={this.handleSignout} onSearchChange={this.onSearchChange}/>
         {
           
           this.props.user
@@ -49,6 +57,11 @@ class App extends React.Component {
             <Route path="/" exact component={HomePage}/>  
           </>
         }
+        {
+          this.props.searchTerm && <Redirect to='/search'/>
+        }
+
+        <Route path="/search" exact component={SearchResultsPage} />
         <Route path="/signup" exact component={Signup} />
         <Route path="/login" exact component={Login} />
         <Route path="/passwordReset" exact component={PasswordReset} />
@@ -58,7 +71,7 @@ class App extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { user: state.currentUser };
+  return { user: state.currentUser, searchTerm: state.searchTerm};
 };
 
 export default connect(

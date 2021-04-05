@@ -27,7 +27,6 @@ export const mostPopularMovies = () => async dispatch => {
 };
 
 export const currentDisplayedDetails = (id) => async dispatch => {
-  console.log('vbvbvbvbvb');
   const response = await axios.get(`/movie/${id}?api_key=${api_key}&append_to_response=similar,videos,credits`);
   console.log(response);
   dispatch({ type: 'CURRENT_DISPLAYED_DETAILS', payload: response.data});
@@ -55,3 +54,17 @@ export const moviesByGenresAction = () => async dispatch => {
 };
 
 
+export const searchTerm = search => {
+  // Return an action
+  return {
+    type: 'CURRENT_SEARCH_TERM',
+    payload: search
+  };
+};
+
+export const fetchSearchResults = (search) => async dispatch => {
+  const str = `/search/movie?api_key=${api_key}&language=en-US&query=${search.replace(' ','%20')}&include_adult=false`;
+  const response = await axios.get(`/search/movie?api_key=${api_key}&language=en-US&sort_by=popularity.desc&query=${search.replace(' ','%20')}&include_adult=false`);
+  console.log(str);
+  dispatch({ type: 'SEARCH_RESULTS', payload: response.data.results});
+} 

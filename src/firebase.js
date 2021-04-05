@@ -20,21 +20,30 @@ export const generateUserDocument = async (user, additionalData) => {
   if (!user) return;
   const userRef = firestore.doc(`users/${user.uid}`);
   const snapshot = await userRef.get();
+  console.log('firebase rocks!');
   if (!snapshot.exists) {
     const { email } = user;
     try {
-      const newProfile = {
-        name: 'your profile',
-        imageUrl: 'https://i.pinimg.com/originals/0d/dc/ca/0ddccae723d85a703b798a5e682c23c1.png',
-        continueWatching: [],
-        watchList: []
-      }
-      const profileId = await firestore.collection("profiles").add(newProfile);
+      // const newProfile = {
+      //   name: 'your profile',
+      //   imageUrl: 'https://i.pinimg.com/originals/0d/dc/ca/0ddccae723d85a703b798a5e682c23c1.png',
+      //   // continueWatching: [],
+      //   // watchList: []
+      // }
+      // const profileId = await firestore.collection("profiles").add(newProfile);
+      // firestore.doc()
       await userRef.set({
         email,
-        profiles: [firestore.doc(`profiles/${profileId.id}`)],
+        // profiles: [firestore.doc(`profiles/${profileId.id}`)],
         ...additionalData
       });
+      const defauldProfileDocId = await userRef.collection('profiles')
+      .add({name: 'your profile',
+            imageUrl: 'https://i.pinimg.com/originals/0d/dc/ca/0ddccae723d85a703b798a5e682c23c1.png'});
+      // await userRef.collection(`profiles/${defauldProfileDocId}`).collection('watchList');
+      // await userRef.collection(`profiles/${defauldProfileDocId}`).collection('continueWatching');
+      
+
     } catch (error) {
       console.error("Error creating user document", error);
     }
@@ -45,13 +54,17 @@ export const generateUserDocument = async (user, additionalData) => {
 const getUserDocument = async uid => {
   if (!uid) return null;
   try {
-    const userDocument = await firestore.doc(`users/${uid}`).get();
-
-    const userProfiles = await Promise.all(userDocument.data().profiles.map(async (profile) => (await profile.get()).data())) ;
+    const userDocRef = firestore.doc(`users/${uid}`);
+    const userDocument = await userDocRef.get();
+    // const temp = []
+    const snapshot = await userDocRef.collection('profiles').get();
+    const profiles = snapshot.docs.map(doc => doc.data());
+    console.log(snapshot);
+    // const userProfiles = await Promise.all(temp.map(async (profile) => (await profile.get()).data())) ;
     return {
       uid,
       ...userDocument.data(),
-      profiles: userProfiles,
+      profiles: profiles,
     };
   } catch (error) {
     console.error("Error fetching user", error);

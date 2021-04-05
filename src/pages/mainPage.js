@@ -3,9 +3,8 @@ import { connect } from 'react-redux';
 import { currentProfile, mostPopularMovies, moviesByGenresAction } from '../actions';
 import '../App.css';
 import CardStripe from '../components/cardsStripe';
-import { auth } from "../firebase";
+import { auth,firestore } from "../firebase";
 import ProfilePage from './profiles';
-
 class MainPage extends React.Component {
     componentDidMount = async () => {
         console.log(`I'm in main page`);
@@ -14,6 +13,9 @@ class MainPage extends React.Component {
         this.props.moviesByGenresAction();
     }
 
+    addMovieToProfileList = async (Movie) =>{
+        const userDocument = await firestore.doc(`users/${this.props.user.uid}`).set();
+    }
 
     render() {
         return (
@@ -21,14 +23,7 @@ class MainPage extends React.Component {
                 {
                     this.props.profile &&
                     <div className="">
-                        <div className="navbar__mainPage">
-                            <ul>
-                                <li>
-                                    <button>Movies</button>
-                                    <button>TV Shows</button>
-                                </li>
-                            </ul>
-                        </div>
+                        
                         <CardStripe movies={this.props.popularMovies} title="popular movies"></CardStripe>
 
                         {
@@ -39,7 +34,7 @@ class MainPage extends React.Component {
                                 })
                         }
         
-                        <button onClick={() => { auth.signOut(); sessionStorage.removeItem(currentProfile); }}>SignOut</button>
+                        {/* <button onClick={() => { auth.signOut(); sessionStorage.removeItem(currentProfile); }}>SignOut</button> */}
                     </div>
                 }
                 {!this.props.profile && <ProfilePage />}

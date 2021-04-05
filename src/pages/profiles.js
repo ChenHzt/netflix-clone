@@ -17,9 +17,9 @@ class ProfilesPage extends React.Component {
         sessionStorage.setItem('currentProfile',JSON.stringify(profile));
     }
 
-    renderProfile = (p) =>{
+    renderProfile = (p,id) =>{
         return (
-            <Link to='/browse' key={p.name} onClick={() => this.chooseProfile1(p) } className="profileCard">
+            <Link to='/browse' key={id} onClick={() => this.chooseProfile1(p) } className="profileCard">
                 <img src={p.imageUrl} alt="profile"/>
                 <p>{p.name}</p>
             </Link>
@@ -27,6 +27,7 @@ class ProfilesPage extends React.Component {
     }
 
     renderProfilesList = () => {
+        console.log(this.props.user);
         return (
             <div className="profilesContainer">
                 {this.props.user && this.props.user.profiles.map(this.renderProfile)}

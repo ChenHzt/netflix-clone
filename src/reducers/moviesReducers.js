@@ -32,3 +32,17 @@ export const popularMoviesReducer = (popularMovies = [], action) => {
     return current;
   };
 
+  export const currentSearchTermReducer = (current = '', action) => {
+    if (action.type === 'CURRENT_SEARCH_TERM') {
+      return action.payload;
+    }
+    return current;
+  };
+
+  export const searchResultsReducer = (results = [], action) => {
+    if (action.type === 'SEARCH_RESULTS') {
+      return action.payload;
+    }
+    return results;
+  };
+
