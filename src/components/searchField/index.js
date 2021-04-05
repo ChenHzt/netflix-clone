@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 function SearchField(props) {
     const searchTermChange = (event) =>{
         props.searchTermAction(event.target.value);
-        props.onSearchChange();
+        
     }
     return (
         <StyledSearchField>
