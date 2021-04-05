@@ -13,9 +13,7 @@ class MainPage extends React.Component {
         this.props.moviesByGenresAction();
     }
 
-    addMovieToProfileList = async (Movie) =>{
-        const userDocument = await firestore.doc(`users/${this.props.user.uid}`).set();
-    }
+    
 
     render() {
         return (

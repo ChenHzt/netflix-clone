@@ -31,9 +31,6 @@ class App extends React.Component {
     });
   }
 
-  onSearchChange() {
-    
-  }
 
   handleSignout(){
     auth.signOut();

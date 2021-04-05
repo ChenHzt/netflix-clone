@@ -15,7 +15,6 @@ export default function SignupPage() {
 
         try {
             const { user } = await auth.createUserWithEmailAndPassword(email, password1);
-            // console.log(generateUserDocument(user, { fullName }));
         }
         catch (error) {
             setError('Error Signing up with email and password');

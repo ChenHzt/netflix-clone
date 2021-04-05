@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { RoundBtn } from '../../style'
 import { CardImg, ButtonsContainer, Title, Card } from './style'
-import { currentDisplayedDetails } from '../../actions'
+import { currentDisplayedDetails, currentUser } from '../../actions'
 import { connect } from 'react-redux';
 import Modal from 'react-modal';
+import { auth,firestore } from "../../firebase";
 import MovieDetails from '../../pages/movieDetails';
 const customStyles = {
     content: {
@@ -38,6 +39,17 @@ function CardDetails(props) {
         setShowModal(true);
 
     }
+    const addMovieToProfileList = async (movie) =>{
+        try{
+            console.log(props);
+            console.log(await firestore.doc(`users/${props.user.uid}/profiles/${props.profile.id}`).collection('watchList').add(movie));
+        
+
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
     return (
         <Card onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} isHovered={isHovered} className="cardDetails">
             <CardImg src={props.movie.backdrop_path} />
@@ -45,7 +57,7 @@ function CardDetails(props) {
             {isHovered &&
                 <ButtonsContainer>
                     <RoundBtn><i className="fas fa-play"></i></RoundBtn>
-                    <RoundBtn><i className="fas fa-plus"></i></RoundBtn>
+                    <RoundBtn onClick={() => addMovieToProfileList(props.movie)}><i className="fas fa-plus"></i></RoundBtn>
                     <RoundBtn><i className="far fa-thumbs-up"></i></RoundBtn>
                     <RoundBtn><i className="far fa-thumbs-down"></i></RoundBtn>
                     <RoundBtn onClick={() => openDetails()}><i className="fas fa-angle-down"></i></RoundBtn>
@@ -64,7 +76,7 @@ function CardDetails(props) {
 }
 
 const mapStateToProps = state => {
-    return { currentDisplayed:state.currentDisplayedDetails };
+    return { currentDisplayed:state.currentDisplayedDetails,user:state.currentUser,profile:state.currentProfile};
 };
 
 export default connect(

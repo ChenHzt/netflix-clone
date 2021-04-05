@@ -58,8 +58,8 @@ const getUserDocument = async uid => {
     const userDocument = await userDocRef.get();
     // const temp = []
     const snapshot = await userDocRef.collection('profiles').get();
-    const profiles = snapshot.docs.map(doc => doc.data());
-    console.log(snapshot);
+    const profiles = snapshot.docs.map(doc => {return {...doc.data(),id:doc.id}});
+    console.log(profiles);
     // const userProfiles = await Promise.all(temp.map(async (profile) => (await profile.get()).data())) ;
     return {
       uid,
