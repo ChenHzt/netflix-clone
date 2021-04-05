@@ -1,4 +1,3 @@
-import cloneDeep from 'lodash.clonedeep';
 
 export const popularMoviesReducer = (popularMovies = [], action) => {
     if (action.type === 'POPULAR_MOVIES') {

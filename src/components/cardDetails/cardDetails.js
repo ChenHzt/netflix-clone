@@ -44,11 +44,11 @@ function CardDetails(props) {
             {isHovered && <Title>{props.movie.title}</Title>}
             {isHovered &&
                 <ButtonsContainer>
-                    <RoundBtn><i class="fas fa-play"></i></RoundBtn>
-                    <RoundBtn><i class="fas fa-plus"></i></RoundBtn>
-                    <RoundBtn><i class="far fa-thumbs-up"></i></RoundBtn>
-                    <RoundBtn><i class="far fa-thumbs-down"></i></RoundBtn>
-                    <RoundBtn onClick={() => openDetails()}><i class="fas fa-angle-down"></i></RoundBtn>
+                    <RoundBtn><i className="fas fa-play"></i></RoundBtn>
+                    <RoundBtn><i className="fas fa-plus"></i></RoundBtn>
+                    <RoundBtn><i className="far fa-thumbs-up"></i></RoundBtn>
+                    <RoundBtn><i className="far fa-thumbs-down"></i></RoundBtn>
+                    <RoundBtn onClick={() => openDetails()}><i className="fas fa-angle-down"></i></RoundBtn>
                 </ButtonsContainer>
             }
             {showModal && <Modal

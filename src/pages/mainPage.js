@@ -1,40 +1,47 @@
-import '../App.css';
-import React, { useState } from 'react';
-import axios from '../api/axios-tmdb';
+import React from 'react';
 import { connect } from 'react-redux';
+import { currentProfile, mostPopularMovies, moviesByGenresAction } from '../actions';
+import '../App.css';
+import CardStripe from '../components/cardsStripe';
 import { auth } from "../firebase";
-import ProfilePage from './profiles'
-import CardStripe from '../components/cardsStripe'
-import { mostPopularMovies } from '../actions';
-import { moviesByGenresAction } from '../actions';
+import ProfilePage from './profiles';
 
 class MainPage extends React.Component {
     componentDidMount = async () => {
+        console.log(`I'm in main page`);
+        this.props.currentProfile(JSON.parse(sessionStorage.getItem('currentProfile')));
         this.props.mostPopularMovies();
         this.props.moviesByGenresAction();
     }
+
+
     render() {
-        console.log(this.props.moviesByGenres);
         return (
             <div className="mainPage">
-                <div className="navbar__mainPage">
-                    <ul>
-                        <li>
-                            <button>Movies</button>
-                            <button>TV Shows</button>
-                        </li>
-                    </ul>
-                </div>
-                <CardStripe movies={this.props.popularMovies} title="popular movies"></CardStripe>
-                
                 {
-                    this.props.moviesByGenres
-                    .sort( () => 0.5 - Math.random())
-                    .map((movies) =>{
-                        return <CardStripe movies={movies.movies} title={`${movies.genre.name} movies`}></CardStripe>
-                    })
+                    this.props.profile &&
+                    <div className="">
+                        <div className="navbar__mainPage">
+                            <ul>
+                                <li>
+                                    <button>Movies</button>
+                                    <button>TV Shows</button>
+                                </li>
+                            </ul>
+                        </div>
+                        <CardStripe movies={this.props.popularMovies} title="popular movies"></CardStripe>
+
+                        {
+                            this.props.moviesByGenres
+                                .sort(() => 0.5 - Math.random())
+                                .map((movies) => {
+                                    return <CardStripe movies={movies.movies} title={`${movies.genre.name} movies`}></CardStripe>
+                                })
+                        }
+        
+                        <button onClick={() => { auth.signOut(); sessionStorage.removeItem(currentProfile); }}>SignOut</button>
+                    </div>
                 }
-                <button onClick={() => { auth.signOut() }}>SignOut</button>
                 {!this.props.profile && <ProfilePage />}
 
             </div>
@@ -44,11 +51,11 @@ class MainPage extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        user: state.currentUser,
+        // user: state.currentUser,
         profile: state.currentProfile,
         popularMovies: state.popularMovies,
-        moviesByGenres:state.moviesByGenres
+        moviesByGenres: state.moviesByGenres
     };
 };
 
-export default connect(mapStateToProps, { mostPopularMovies,moviesByGenresAction })(MainPage);
+export default connect(mapStateToProps, { mostPopularMovies, moviesByGenresAction,currentProfile })(MainPage);

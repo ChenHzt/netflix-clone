@@ -1,8 +1,7 @@
 import '../App.css';
-import React, { useState } from 'react';
+import React from 'react';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/splide/dist/css/themes/splide-default.min.css';
-import Card from './card/card'
 import CardDetails from './cardDetails/cardDetails'
 
 export default function CardStripe({ title, movies }) {
@@ -19,7 +18,7 @@ export default function CardStripe({ title, movies }) {
                 {
                     movies
                     .sort( () => 0.5 - Math.random())
-                    .map(movie => <SplideSlide><CardDetails  movie={movie}/></SplideSlide>)
+                    .map(movie => <SplideSlide key={movie.id}><CardDetails  movie={movie}/></SplideSlide>)
                 }
             </Splide>
         </div>

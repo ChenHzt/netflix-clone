@@ -2,7 +2,7 @@ import { auth, signInWithGoogle } from "../../firebase";
 import React, { useState } from 'react';
 import { PageBackground, Box, Overlay, Headline, FormItem, Input, PrimaryBtn, SecondaryBtn,Text } from './style';
 import { Link } from "react-router-dom";
-import {HorizontalRule,Logo,Navbar,NavRight,NavLink} from '../../style'
+import {Logo,Navbar} from '../../style'
 
 export default function SignupPage() {
     const [email, setEmail] = useState('');
@@ -56,8 +56,8 @@ export default function SignupPage() {
                         <Input name='password' value={password} label='Password' onChange={onChangeInput} inputType="password" />
                     </FormItem>
 
-                    <PrimaryBtn to=''  onClick={signInWithEmailAndPasswordHandler}>Login</PrimaryBtn>
-                    <SecondaryBtn to='' onClick={signInWithGoogle} >
+                    <PrimaryBtn to='/browse'  onClick={signInWithEmailAndPasswordHandler}>Login</PrimaryBtn>
+                    <SecondaryBtn to='/browse' onClick={signInWithGoogle} >
                     <img height='20px' width='20px' src="https://img.icons8.com/color/452/google-logo.png" alt=""/>
                         Login With Google
                     </SecondaryBtn>

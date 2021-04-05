@@ -1,7 +1,7 @@
-import { auth, generateUserDocument,signInWithGoogle } from "../../firebase";
 import React, { useState } from 'react';
-import {PageBackground,Box,Overlay,Headline,FormItem,Input,PrimaryBtn,SecondaryBtn} from './style';
-import {HorizontalRule,Logo,Navbar,NavRight,NavLink} from '../../style'
+import { auth, generateUserDocument, signInWithGoogle } from "../../firebase";
+import { Logo, Navbar } from '../../style';
+import { Box, FormItem, Headline, Input, Overlay, PageBackground, PrimaryBtn, SecondaryBtn } from './style';
 
 export default function SignupPage() {
     const [fullName, setFullName] = useState('');
@@ -75,8 +75,8 @@ export default function SignupPage() {
                     <FormItem>
                         <Input  name='password2' label='Validate Password' value={password2} onChange={onChangeInput} inputType="password" />
                     </FormItem>
-                    <PrimaryBtn onClick={createUserWithEmailAndPasswordHandler}>Sign Up</PrimaryBtn>
-                    <SecondaryBtn onClick={signInWithGoogle}>
+                    <PrimaryBtn to='/browse' onClick={createUserWithEmailAndPasswordHandler}>Sign Up</PrimaryBtn>
+                    <SecondaryBtn to='/browse' onClick={signInWithGoogle}>
                         <img height='20px' width='20px' src="https://img.icons8.com/color/452/google-logo.png" alt=""/>
                         Sign Up With Google
                     </SecondaryBtn>

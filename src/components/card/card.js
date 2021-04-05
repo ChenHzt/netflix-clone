@@ -1,9 +1,5 @@
 // import '../App.css';
-import { HomePageInfoStripe } from '../homePageInfoStripe/homePageInfoStripe'
-import React, { useState } from 'react';
-import sectionsData from '../../staticData/homePageSections.json'
-import {Link} from "react-router-dom";
-import styled from "styled-components";
+import React from 'react';
 import {CardDiv} from './style'
 
 export default function Card({movie}) {

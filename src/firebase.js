@@ -61,7 +61,7 @@ const getUserDocument = async uid => {
 const provider = new firebase.auth.GoogleAuthProvider();
 
 export const signInWithGoogle = async () => {
-  const { user } = await auth.signInWithPopup(provider);
+  await auth.signInWithPopup(provider);
   // const userFullName = user.displayName;
   
   // console.log(user);

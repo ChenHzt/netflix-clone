@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { RoundBtn } from '../../style'
-import { Card , Image,Details,Year,Title,Description} from './style'
+import React from 'react';
+import { Card, Description, Details, Image, Title, Year } from './style';
 
 
 export function SimilarCard({details}) {

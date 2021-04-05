@@ -7,6 +7,7 @@ import thunk from 'redux-thunk';
 import App from './App';
 import reducers from './reducers';
 import reportWebVitals from './reportWebVitals';
+// import { composeWithDevTools } from 'redux-devtools-extension';
 
 const store = createStore(reducers, applyMiddleware(thunk));
 ReactDOM.render(

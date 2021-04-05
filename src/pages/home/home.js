@@ -1,15 +1,17 @@
-import { HomePageInfoStripe } from '../../components/homePageInfoStripe/homePageInfoStripe'
-import React, { useState } from 'react';
-import sectionsData from '../../staticData/homePageSections.json'   
+import React from 'react';
+import { HomePageInfoStripe } from '../../components/homePageInfoStripe/homePageInfoStripe';
 import Jumbotron from '../../components/jumbotron/jumbotron';
-import { Title, Description, FlexContainer } from './style'
-import {HorizontalRule,Logo,Navbar,NavRight,NavLink} from '../../style'
+import sectionsData from '../../staticData/homePageSections.json';
+import { HorizontalRule, Logo, Navbar, NavLink, NavRight } from '../../style';
+import { Description, FlexContainer, Title } from './style';
 
 export default function HomePage() {
+
+    console.log(`I'm in home page`);
     return (
         <div className="homePage">
             <Navbar>
-                <Logo src='http://assets.stickpng.com/images/580b57fcd9996e24bc43c529.png'/>
+                <Logo to='/' src='http://assets.stickpng.com/images/580b57fcd9996e24bc43c529.png'/>
                 <NavRight>
                     <NavLink to='/signup'>Sign Up</NavLink>
                     <NavLink to='/login'>Login</NavLink>

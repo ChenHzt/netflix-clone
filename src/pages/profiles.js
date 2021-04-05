@@ -1,16 +1,25 @@
-import '../App.css';
-import React, { useState } from 'react';
-import { Link } from "react-router-dom";
-import { auth, firestore, getCurrentUserData } from "../firebase";
+import React from 'react';
 import { connect } from 'react-redux';
-import {currentProfile} from '../actions'
+import { Link } from "react-router-dom";
+import { currentProfile } from '../actions';
+import '../App.css';
 
 class ProfilesPage extends React.Component {
+    constructor(props){
+        super(props);
+        console.log(props);
+        this.chooseProfile1 = this.chooseProfile.bind(this);
+    }
+
+    chooseProfile = (profile) =>{
+        console.log(profile);
+        this.props.currentProfile(profile);
+        sessionStorage.setItem('currentProfile',JSON.stringify(profile));
+    }
 
     renderProfile = (p) =>{
-        const setProfile = this.props.currentProfile;
         return (
-            <Link to='' key={p.name} onClick={() => setProfile(p) } className="profileCard">
+            <Link to='/browse' key={p.name} onClick={() => this.chooseProfile1(p) } className="profileCard">
                 <img src={p.imageUrl} alt="profile"/>
                 <p>{p.name}</p>
             </Link>
@@ -20,7 +29,7 @@ class ProfilesPage extends React.Component {
     renderProfilesList = () => {
         return (
             <div className="profilesContainer">
-                {this.props.user.profiles.map(this.renderProfile)}
+                {this.props.user && this.props.user.profiles.map(this.renderProfile)}
             </div>
         )
     }
