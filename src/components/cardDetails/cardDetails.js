@@ -58,7 +58,7 @@ function CardDetails(props) {
 
     const addMovieToStartedWatchingList = async (movie) => {
         try {
-
+            await props.currentDisplayedDetails(props.movie.id);
             setShowModal(false)
             await props.addToCurrentProfileStartedWatchingList(props.user.uid,props.profile.id,movie);
             setPlayVideo(true);
@@ -97,7 +97,6 @@ function CardDetails(props) {
                 style={{ content: { width: '100%', height: '100%', maxWidth: '100vw', maxHeight: '100vh', position: 'initial', padding: 0, overflow: 'hidden' }, overlay: { zIndex: '10', display: 'flex', alignItems: 'center', justifyContent: 'center', } }}
                 shouldCloseOnOverlayClick={true}
                 contentLabel="Movie details modal">
-                {/* <YouTubeWrapper youtubeId={props.currentDisplayed.videos.results[0].key} disableClicks={false}></YouTubeWrapper> */}
                 <YTPlayer containerClassName={'youtubeContainerTemp'} id={props.currentDisplayed.videos.results[0].key} />
             </Modal>}
         </Card>

@@ -64,3 +64,9 @@ export const popularMoviesReducer = (popularMovies = [], action) => {
     return results;
   };
 
+  export const castomizedMoviesListReducer = (results = [], action) => {
+    if (action.type === 'CUSTOMISED_MOVIES_LIST') {
+      return action.payload;
+    }
+    return results;
+  };

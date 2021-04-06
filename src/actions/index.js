@@ -30,7 +30,6 @@ export const mostPopularMovies = () => async dispatch => {
 export const currentDisplayedDetails = (id) => async dispatch => {
   console.log(`id is:${id}`);
   const response = await axios.get(`/movie/${id}?api_key=${api_key}&append_to_response=similar,videos,credits`);
-  console.log(response);
   dispatch({ type: 'CURRENT_DISPLAYED_DETAILS', payload: response.data });
 }
 
@@ -86,7 +85,7 @@ export const fetchSearchResults = (search) => async dispatch => {
 export const fetchCurrentProfileWatchList = (userId, profileId) => async dispatch => {
   const snapshot = await firestore.collection(`users/${userId}/profiles/${profileId}/watchList`).get();
   const watchList = snapshot.docs.map(doc => { return { ...doc.data() } });
-  console.log(watchList);
+
   dispatch({ type: 'WATCH_LIST', payload: watchList });
 }
 
@@ -107,3 +106,21 @@ export const addToCurrentProfileStartedWatchingList = (userId, profileId,movie) 
   dispatch({ type: 'ADD_TO_STARTED_WATCHING_LIST', payload: movie });
 }
 
+export const fetchCastomizedMoviesList = (userId, profileId) => async dispatch => {
+  const startedWatchingSnapshot = await firestore.collection(`users/${userId}/profiles/${profileId}/startedWatching`).get();
+  const startedWatchingList = startedWatchingSnapshot.docs.map(doc => {return { ...doc.data() } });
+  const snapshot = await firestore.collection(`users/${userId}/profiles/${profileId}/watchList`).get();
+  const watchList = snapshot.docs.map(doc => { return { ...doc.data() } });
+
+  const result = [];
+  startedWatchingList.slice(0,2).forEach(async (movie) => {
+    const response = await axios.get(`/movie/${movie.id}?api_key=${api_key}&append_to_response=similar,videos,credits`);
+    result.push({title:`Because you watched "${movie.title}"`,moviesList:response.data.similar.results})
+  })
+  watchList.slice(0,2).forEach(async (movie) => {
+    const response = await axios.get(`/movie/${movie.id}?api_key=${api_key}&append_to_response=similar,videos,credits`);
+    result.push({title:`Because "${movie.title}" is in your watching list`,moviesList:response.data.similar.results})
+  })
+  console.log(result);
+  dispatch({ type: 'CUSTOMISED_MOVIES_LIST', payload: result });
+}
