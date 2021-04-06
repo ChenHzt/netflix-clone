@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { SimilarCard } from '../components/similarCard/similarCard'
 import YouTube from "react-youtube";
 import YouTubeWrapper from '../components/youtubeWrapper'
+import YTPlayer from '../components/ytplayer';
 const ShowCase = styled.div`
     background:url(https://image.tmdb.org/t/p/original${props => props.src}) no-repeat center center/cover;
     width:100%;
@@ -28,40 +29,43 @@ const BtnsContainer = styled.div`
 function MovieDetails(props) {
     console.log(props);
     const isVideo = () => {
-        if (props.currentDisplayed.videos.results.length>0 && props.currentDisplayed.videos.results[0].site === 'YouTube') {
+        if (props.currentDisplayed.videos.results.length > 0 && props.currentDisplayed.videos.results[0].site === 'YouTube') {
             console.log(props.currentDisplayed.videos.results[0].key);
-            return ;
+            return;
 
         }
     }
     return (
         <div style={{ maxHeight: '80vh', overflowY: 'auto' }} className="movieDetails">
-            {(props.currentDisplayed.videos.results.length>0 && props.currentDisplayed.videos.results[0].site === 'YouTube') &&
-                <YouTubeWrapper youtubeId={props.currentDisplayed.videos.results[0].key} >
+            {(props.currentDisplayed.videos.results.length > 0 && props.currentDisplayed.videos.results[0].site === 'YouTube') &&
+                <>
+                    {/* <YouTubeWrapper youtubeId={props.currentDisplayed.videos.results[0].key} disableClicks={true}>
                     <BtnsContainer>
-                <RectengleBtn>
-                    <i class="fas fa-play"></i>
-                    <span>Play</span>
-                </RectengleBtn>
-                <RoundBtn onClick={props.addMovieToProfileList}><i class="fas fa-plus"></i></RoundBtn>
-                <RoundBtn><i class="far fa-thumbs-up"></i></RoundBtn>
-                <RoundBtn><i class="far fa-thumbs-down"></i></RoundBtn>
-            </BtnsContainer>
-                </YouTubeWrapper>
+                        <RectengleBtn>
+                            <i class="fas fa-play"></i>
+                            <span>Play</span>
+                        </RectengleBtn>
+                        <RoundBtn onClick={props.addMovieToProfileList}><i class="fas fa-plus"></i></RoundBtn>
+                        <RoundBtn><i class="far fa-thumbs-up"></i></RoundBtn>
+                        <RoundBtn><i class="far fa-thumbs-down"></i></RoundBtn>
+                    </BtnsContainer>
+                    </YouTubeWrapper> */}
+                <YTPlayer containerClassName={'youtubeContainerTemp'} id={props.currentDisplayed.videos.results[0].key}/>
+                </>
             }
-            
-            {props.currentDisplayed.videos.results.length===0 &&
-            <ShowCase src={props.currentDisplayed.backdrop_path}>
-                <BtnsContainer>
-                <RectengleBtn>
-                    <i class="fas fa-play"></i>
-                    <span>Play</span>
-                </RectengleBtn>
-                <RoundBtn onClick={props.addMovieToProfileList}><i class="fas fa-plus"></i></RoundBtn>
-                <RoundBtn><i class="far fa-thumbs-up"></i></RoundBtn>
-                <RoundBtn><i class="far fa-thumbs-down"></i></RoundBtn>
-            </BtnsContainer>
-            </ShowCase>}
+
+            {props.currentDisplayed.videos.results.length === 0 &&
+                <ShowCase src={props.currentDisplayed.backdrop_path}>
+                    <BtnsContainer>
+                        <RectengleBtn>
+                            <i class="fas fa-play"></i>
+                            <span>Play</span>
+                        </RectengleBtn>
+                        <RoundBtn onClick={props.addMovieToProfileList}><i class="fas fa-plus"></i></RoundBtn>
+                        <RoundBtn><i class="far fa-thumbs-up"></i></RoundBtn>
+                        <RoundBtn><i class="far fa-thumbs-down"></i></RoundBtn>
+                    </BtnsContainer>
+                </ShowCase>}
             <div className="">
                 <span>{props.currentDisplayed.release_date.slice(0, 4)}, </span>
                 <span>{props.currentDisplayed.runtime} minutes</span>

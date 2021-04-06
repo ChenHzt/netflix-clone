@@ -1,4 +1,4 @@
-export default function YouTubeWrapper  ({ youtubeId , children}) {
+export default function YouTubeWrapper  ({ youtubeId , children,disableClicks}) {
     const t = `https://www.youtube.com/embed/${youtubeId}`
     return (
         <div
@@ -17,9 +17,9 @@ export default function YouTubeWrapper  ({ youtubeId , children}) {
           left: 0,
           width: "100%",
           height: "100%",
-          zIndex:-1,
+          zIndex: disableClicks?-1:0,
         }}
-        src={`https://www.youtube.com/embed/${youtubeId}?autoplay=1&showinfo=0&controls=0`}
+        src={`https://www.youtube.com/embed/${youtubeId}?autoplay=1&showinfo=0&controls=${disableClicks?'0':'1'}`}
         frameBorder="0"
         title='you tube'
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

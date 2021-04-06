@@ -8,6 +8,7 @@
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.1",
+    "device-detector-js": "^2.2.8",
     "firebase": "^8.3.2",
     "lodash.clonedeep": "^4.5.0",
     "react": "^17.0.2",
@@ -22,6 +23,7 @@
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
+    "screenfull": "^5.1.0",
     "styled-components": "^5.2.3",
     "web-vitals": "^1.1.1"
   },
