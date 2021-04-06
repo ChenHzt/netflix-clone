@@ -1,13 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
-import { currentProfile } from '../actions';
-import '../App.css';
+import { currentProfile } from '../../actions';
+import {StyledBtn,StyledProfileCard,StyledProfileImg,StyledProfileName,StyledProfilesContainer,StyledProfilePage,StyleHeadline} from './style'
+
+// import '../App.css';
 
 class ProfilesPage extends React.Component {
     constructor(props){
         super(props);
-        console.log(props);
         this.chooseProfile1 = this.chooseProfile.bind(this);
     }
 
@@ -17,30 +18,37 @@ class ProfilesPage extends React.Component {
         sessionStorage.setItem('currentProfile',JSON.stringify(profile));
     }
 
-    renderProfile = (p,id) =>{
+    renderProfile = (p) =>{
         return (
-            <Link to='/browse' key={id} onClick={() => this.chooseProfile1(p) } className="profileCard">
-                <img src={p.imageUrl} alt="profile"/>
-                <p>{p.name}</p>
-            </Link>
+            <StyledProfileCard to='/browse' key={p.id} onClick={() => this.chooseProfile1(p) } className="profileCard">
+                
+                    <StyledProfileImg  src={p.imageUrl} alt="profile"/>
+                    <StyledProfileName>{p.name}</StyledProfileName>
+                
+            </StyledProfileCard>
         )
     }
 
     renderProfilesList = () => {
         console.log(this.props.user);
         return (
-            <div className="profilesContainer">
+            <StyledProfilesContainer>
                 {this.props.user && this.props.user.profiles.map(this.renderProfile)}
-            </div>
+            </StyledProfilesContainer>
         )
     }
     
+
     render(){
         return (
         
-            <div className="profilesPage">
+            <StyledProfilePage>
+                <StyleHeadline>
+                    Who's watching?
+                </StyleHeadline>
                 {this.renderProfilesList()}
-            </div>
+                <StyledBtn>Manage Profiles</StyledBtn>
+            </StyledProfilePage>
         )
     }
 }

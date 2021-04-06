@@ -4,7 +4,8 @@ import { currentProfile, mostPopularMovies, moviesByGenresAction } from '../acti
 import '../App.css';
 import CardStripe from '../components/cardsStripe';
 import { auth,firestore } from "../firebase";
-import ProfilePage from './profiles';
+import ProfilePage from './profiles/profiles';
+
 class MainPage extends React.Component {
     componentDidMount = async () => {
         console.log(`I'm in main page`);
