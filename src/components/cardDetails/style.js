@@ -39,7 +39,7 @@ export const ButtonsContainer = styled.div`
     flex-direction:row;
     // justify-content:center;
     align-items:center;
-    max-width:100%;
+    
 `
 
 export const Title = styled.p`

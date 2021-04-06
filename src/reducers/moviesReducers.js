@@ -46,3 +46,21 @@ export const popularMoviesReducer = (popularMovies = [], action) => {
     return results;
   };
 
+  export const currentProfileWatchListReducer = (results = [], action) => {
+    if (action.type === 'WATCH_LIST') {
+      return action.payload;
+    }
+    else if(action.type === 'ADD_TO_WATCH_LIST')
+      return [...results,action.payload];
+    return results;
+  };
+
+  export const currentProfileStartedWatchingListReducer = (results = [], action) => {
+    if (action.type === 'STARTED_WATCHING_LIST') {
+      return action.payload;
+    }
+    else if(action.type === 'ADD_TO_STARTED_WATCHING_LIST')
+      return [...results,action.payload];
+    return results;
+  };
+

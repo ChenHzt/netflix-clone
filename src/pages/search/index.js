@@ -5,6 +5,7 @@ import React,{useEffect,useState} from 'react';
 import CardDetails from '../../components/cardDetails/cardDetails'
 import {StyledGridContainer} from './style'
 import { Redirect } from 'react-router';
+import CardsGrid from '../../components/cardsGrid';
 function SearchResultsPage(props) {
     const [term, setTerm] = useState("programming");
 
@@ -31,10 +32,10 @@ function SearchResultsPage(props) {
 
     
     return (
-        <StyledGridContainer>
+        <CardsGrid>
             {!props.searchTerm && <Redirect to='/browse'/> }
             {props.searchResults.map((movie) => <CardDetails  movie={movie}/>)}
-        </StyledGridContainer>
+        </CardsGrid>
     )
 }
 

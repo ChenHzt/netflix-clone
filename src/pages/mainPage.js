@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { currentProfile, mostPopularMovies, moviesByGenresAction } from '../actions';
+import { currentProfile, mostPopularMovies, moviesByGenresAction,fetchCurrentProfileStartedWatching} from '../actions';
 import '../App.css';
 import CardStripe from '../components/cardsStripe';
 import { auth,firestore } from "../firebase";
@@ -8,13 +8,11 @@ import ProfilePage from './profiles/profiles';
 
 class MainPage extends React.Component {
     componentDidMount = async () => {
-        console.log(`I'm in main page`);
-        this.props.currentProfile(JSON.parse(sessionStorage.getItem('currentProfile')));
-        this.props.mostPopularMovies();
-        this.props.moviesByGenresAction();
+        await this.props.currentProfile(JSON.parse(sessionStorage.getItem('currentProfile')));
+        await this.props.mostPopularMovies();
+        await this.props.moviesByGenresAction();
+        await this.props.fetchCurrentProfileStartedWatching(this.props.user.uid,this.props.profile.id);
     }
-
-    
 
     render() {
         return (
@@ -23,17 +21,18 @@ class MainPage extends React.Component {
                     this.props.profile &&
                     <div className="">
                         
-                        <CardStripe movies={this.props.popularMovies} title="popular movies"></CardStripe>
+                        {this.props.startedWatching.length ? <CardStripe caruselType='slide' movies={this.props.startedWatching} title="continue watching"></CardStripe>:null}
+                        
+                        <CardStripe caruselType='loop' movies={this.props.popularMovies} title="popular movies"></CardStripe>
 
                         {
                             this.props.moviesByGenres
                                 .sort(() => 0.5 - Math.random())
                                 .map((movies) => {
-                                    return <CardStripe movies={movies.movies} title={`${movies.genre.name} movies`}></CardStripe>
+                                    return <CardStripe caruselType='loop' movies={movies.movies} title={`${movies.genre.name} movies`}></CardStripe>
                                 })
                         }
         
-                        {/* <button onClick={() => { auth.signOut(); sessionStorage.removeItem(currentProfile); }}>SignOut</button> */}
                     </div>
                 }
                 {!this.props.profile && <ProfilePage />}
@@ -44,12 +43,14 @@ class MainPage extends React.Component {
 }
 
 const mapStateToProps = state => {
+    console.log(state);
     return {
-        // user: state.currentUser,
+        user: state.currentUser,
         profile: state.currentProfile,
         popularMovies: state.popularMovies,
-        moviesByGenres: state.moviesByGenres
+        moviesByGenres: state.moviesByGenres,
+        startedWatching: state.startedWatching
     };
 };
 
-export default connect(mapStateToProps, { mostPopularMovies, moviesByGenresAction,currentProfile })(MainPage);
+export default connect(mapStateToProps, { mostPopularMovies, moviesByGenresAction,currentProfile,fetchCurrentProfileStartedWatching})(MainPage);

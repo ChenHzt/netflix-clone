@@ -14,6 +14,7 @@ import { auth, getCurrentUserData,generateUserDocument } from "./firebase";
 import { connect } from 'react-redux';
 import { currentUser } from './actions';
 import Navbar from './components/navbar/navbar';
+import watchList from './pages/watchList';
 
 
 class App extends React.Component {
@@ -58,6 +59,7 @@ class App extends React.Component {
           this.props.searchTerm && <Redirect to='/search'/>
         }
 
+        <Route path="/myList" exact component={watchList} />
         <Route path="/search" exact component={SearchResultsPage} />
         <Route path="/signup" exact component={Signup} />
         <Route path="/login" exact component={Login} />

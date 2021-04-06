@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import {currentUserReducer,currentProfileReducer} from './authReducers'
-import {popularMoviesReducer, moviesByGenreReducer,currentDisplayedDetailsReducer,currentSearchTermReducer,searchResultsReducer} from './moviesReducers'
+import {popularMoviesReducer,currentProfileStartedWatchingListReducer,currentProfileWatchListReducer, moviesByGenreReducer,currentDisplayedDetailsReducer,currentSearchTermReducer,searchResultsReducer} from './moviesReducers'
 
 
   export default combineReducers({
@@ -10,5 +10,7 @@ import {popularMoviesReducer, moviesByGenreReducer,currentDisplayedDetailsReduce
     moviesByGenres: moviesByGenreReducer,
     currentDisplayed:currentDisplayedDetailsReducer,
     searchTerm:currentSearchTermReducer,
-    searchResults:searchResultsReducer
+    searchResults:searchResultsReducer,
+    watchList:currentProfileWatchListReducer,
+    startedWatching:currentProfileStartedWatchingListReducer,
   });

@@ -4,7 +4,7 @@ import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/splide/dist/css/themes/splide-default.min.css';
 import CardDetails from './cardDetails/cardDetails'
 
-export default function CardStripe({ title, movies }) {
+export default function CardStripe({ title, movies,caruselType='slide' }) {
 
     return (
         <div className="stripe" style={{height:'220px', margin:'20px'}}>
@@ -13,12 +13,12 @@ export default function CardStripe({ title, movies }) {
                 perMove: 1,
                 autoWidth: true,
                 pagination: false,
-                type: 'loop',
+                type: caruselType,
             }}>
                 {
                     movies
                     .sort( () => 0.5 - Math.random())
-                    .map(movie => <SplideSlide key={movie.id}><CardDetails  movie={movie}/></SplideSlide>)
+                    .map(movie => <SplideSlide><CardDetails  movie={movie}/></SplideSlide>)
                 }
             </Splide>
         </div>

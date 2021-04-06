@@ -16,6 +16,7 @@ function Navbar(props) {
             
             {props.user &&
             <>
+                <StyledNavLink to='/myList'>My List</StyledNavLink>
                 <StyledNavLink to='/browseMovies'>Movies</StyledNavLink>
                 <StyledNavLink to='/browseTvShows'>TV Shows</StyledNavLink>
                 <StyledNavLink onClick={props.handleSignout} to='/'>Sign Out</StyledNavLink>
