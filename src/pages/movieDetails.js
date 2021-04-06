@@ -28,16 +28,17 @@ const BtnsContainer = styled.div`
 function MovieDetails(props) {
     console.log(props);
     const isVideo = () => {
-        if (props.currentDisplayed.videos.results && props.currentDisplayed.videos.results[0].site === 'YouTube') {
+        if (props.currentDisplayed.videos.results.length>0 && props.currentDisplayed.videos.results[0].site === 'YouTube') {
             console.log(props.currentDisplayed.videos.results[0].key);
-            return <YouTubeWrapper youtubeId={props.currentDisplayed.videos.results[0].key} />;
+            return ;
 
         }
     }
     return (
         <div style={{ maxHeight: '80vh', overflowY: 'auto' }} className="movieDetails">
-            {isVideo()}
-            <BtnsContainer>
+            {(props.currentDisplayed.videos.results.length>0 && props.currentDisplayed.videos.results[0].site === 'YouTube') &&
+                <YouTubeWrapper youtubeId={props.currentDisplayed.videos.results[0].key} >
+                    <BtnsContainer>
                 <RectengleBtn>
                     <i class="fas fa-play"></i>
                     <span>Play</span>
@@ -46,9 +47,21 @@ function MovieDetails(props) {
                 <RoundBtn><i class="far fa-thumbs-up"></i></RoundBtn>
                 <RoundBtn><i class="far fa-thumbs-down"></i></RoundBtn>
             </BtnsContainer>
-            {/* <ShowCase src={props.currentDisplayed.backdrop_path}>
-                
-            </ShowCase> */}
+                </YouTubeWrapper>
+            }
+            
+            {props.currentDisplayed.videos.results.length===0 &&
+            <ShowCase src={props.currentDisplayed.backdrop_path}>
+                <BtnsContainer>
+                <RectengleBtn>
+                    <i class="fas fa-play"></i>
+                    <span>Play</span>
+                </RectengleBtn>
+                <RoundBtn onClick={props.addMovieToProfileList}><i class="fas fa-plus"></i></RoundBtn>
+                <RoundBtn><i class="far fa-thumbs-up"></i></RoundBtn>
+                <RoundBtn><i class="far fa-thumbs-down"></i></RoundBtn>
+            </BtnsContainer>
+            </ShowCase>}
             <div className="">
                 <span>{props.currentDisplayed.release_date.slice(0, 4)}, </span>
                 <span>{props.currentDisplayed.runtime} minutes</span>
