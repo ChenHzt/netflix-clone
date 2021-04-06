@@ -14,6 +14,7 @@ export const currentUser = user => {
 };
 
 export const currentProfile = profile => {
+  sessionStorage.setItem('currentProfile',JSON.stringify(profile));
   // Return an action
   return {
     type: 'CURRENT_PROFILE',
