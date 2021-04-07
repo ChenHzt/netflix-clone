@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { RoundBtn } from '../../style'
 import { CardImg, ButtonsContainer, Title, Card } from './style'
-import { currentDisplayedDetails, addToCurrentProfileStartedWatchingList,addToCurrentProfileWatchList } from '../../actions'
+import { currentDisplayedDetails, addToCurrentProfileStartedWatchingList, addToCurrentProfileWatchList } from '../../actions'
 import { connect } from 'react-redux';
 import Modal from 'react-modal';
-import YouTubeWrapper from '../youtubeWrapper'
-import { auth, firestore } from "../../firebase";
 import MovieDetails from '../../pages/movieDetails';
 import YTPlayer from '../ytplayer';
+import YouTubePlayer from '../youTubePlayer';
+import { Redirect } from 'react-router';
 const customStyles = {
     content: {
         top: '50%',
@@ -33,23 +33,24 @@ Modal.setAppElement('#root');
 
 function CardDetails(props) {
     const [isHovered, setIsHovered] = useState(false);
-    const [showModal, setShowModal] = useState(false);
+    const [showMovieDetailsModal, setShowMovieDetailsModal] = useState(false);
     const [playVideo, setPlayVideo] = useState(false);
 
     const closeModal = () => {
-        setShowModal(false);
+        setShowMovieDetailsModal(false);
         setIsHovered(false);
-    };
 
+    };
 
     const openDetails = async () => {
         await props.currentDisplayedDetails(props.movie.id);
-        setShowModal(true);
-
+        setShowMovieDetailsModal(true);
+        sessionStorage.setItem('currentDisplayed', JSON.stringify(props.currentDisplayed));
     }
+
     const addMovieToProfileList = async (movie) => {
         try {
-            await props.addToCurrentProfileWatchList(props.user.uid,props.profile.id,movie);
+            await props.addToCurrentProfileWatchList(props.user.uid, props.profile.id, movie);
         }
         catch (e) {
             console.log(e);
@@ -59,8 +60,8 @@ function CardDetails(props) {
     const addMovieToStartedWatchingList = async (movie) => {
         try {
             await props.currentDisplayedDetails(props.movie.id);
-            setShowModal(false)
-            await props.addToCurrentProfileStartedWatchingList(props.user.uid,props.profile.id,movie);
+            setShowMovieDetailsModal(false)
+            await props.addToCurrentProfileStartedWatchingList(props.user.uid, props.profile.id, movie);
             setPlayVideo(true);
 
         }
@@ -68,37 +69,56 @@ function CardDetails(props) {
             console.error(error);
         }
     }
-    const renderBtns = (
-        <ButtonsContainer>
-            <RoundBtn onClick={() => addMovieToStartedWatchingList(props.movie)}><i className="fas fa-play"></i></RoundBtn>
-            <RoundBtn onClick={() => addMovieToProfileList(props.movie)}><i className="fas fa-plus"></i></RoundBtn>
-            <RoundBtn><i className="far fa-thumbs-up"></i></RoundBtn>
-            <RoundBtn ><i className="far fa-thumbs-down"></i></RoundBtn>
-            <RoundBtn onClick={() => openDetails()}><i className="fas fa-angle-down"></i></RoundBtn>
-        </ButtonsContainer>
-    )
-    return (
-        <Card onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} isHovered={isHovered} className="cardDetails">
-            <CardImg src={props.movie.backdrop_path} />
-            {isHovered && <Title>{props.movie.title}</Title>}
-            {isHovered && renderBtns}
-            {showModal && <Modal
-                isOpen={showModal}
+
+    const RenderCardIfHovered = () => {
+        if(isHovered)
+        return (
+            <>
+                <Title>{props.movie.title}</Title>
+                <ButtonsContainer>
+                    <RoundBtn onClick={() => addMovieToStartedWatchingList(props.movie)}><i className="fas fa-play"></i></RoundBtn>
+                    <RoundBtn onClick={() => addMovieToProfileList(props.movie)}><i className="fas fa-plus"></i></RoundBtn>
+                    <RoundBtn><i className="far fa-thumbs-up"></i></RoundBtn>
+                    <RoundBtn ><i className="far fa-thumbs-down"></i></RoundBtn>
+                    <RoundBtn onClick={() => openDetails()}><i className="fas fa-angle-down"></i></RoundBtn>
+                </ButtonsContainer>
+
+            </>
+        )
+        return (<></>)
+    }
+
+    const RenderMovieDetailsModal = () =>{
+        if(showMovieDetailsModal)
+        return (
+            <Modal
+                isOpen={showMovieDetailsModal}
                 preventScroll={false}
                 onRequestClose={closeModal}
                 style={customStyles}
                 contentLabel="Movie details modal">
-                <MovieDetails movie={props.movie} addMovieToProfileList={() => addMovieToProfileList(props.movie)} />
-            </Modal>}
-            {playVideo && <Modal
-                isOpen={playVideo}
-                preventScroll={false}
-                onRequestClose={() => setPlayVideo(false)}
-                style={{ content: { width: '100%', height: '100%', maxWidth: '100vw', maxHeight: '100vh', position: 'initial', padding: 0, overflow: 'hidden' }, overlay: { zIndex: '10', display: 'flex', alignItems: 'center', justifyContent: 'center', } }}
-                shouldCloseOnOverlayClick={true}
-                contentLabel="Movie details modal">
-                <YTPlayer containerClassName={'youtubeContainerTemp'} id={props.currentDisplayed.videos.results[0].key} />
-            </Modal>}
+                <MovieDetails movie={props.movie} playVideo={() =>addMovieToStartedWatchingList(props.movie) } addMovieToProfileList={() => addMovieToProfileList(props.movie)} />
+            </Modal>
+        )
+        return (<></>)
+
+    }
+
+    const RenderPlayVideo = () => {
+        if(playVideo)
+        return (
+            <Redirect to={`watch/${props.currentDisplayed.videos.results[0].key}`} />
+        )
+        return (<></>)
+
+    }
+
+    return (
+        <Card onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} isHovered={isHovered} className="cardDetails">
+            <CardImg src={props.movie.backdrop_path} />
+            <RenderCardIfHovered/>
+            <RenderMovieDetailsModal/>
+            <RenderPlayVideo/>
         </Card>
     )
 }
@@ -110,4 +130,4 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    { currentDisplayedDetails,addToCurrentProfileWatchList,addToCurrentProfileStartedWatchingList })(CardDetails);
+    { currentDisplayedDetails, addToCurrentProfileWatchList, addToCurrentProfileStartedWatchingList })(CardDetails);

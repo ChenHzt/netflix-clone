@@ -1,13 +1,10 @@
-import {StyledSearchBtn,StyledSearchField,StyledSearchInput} from './style'
-import {searchTerm,fetchSearchResults} from '../../actions'
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import React,{useEffect,useState} from 'react';
-import CardDetails from '../../components/cardDetails/cardDetails'
-import {StyledGridContainer} from './style'
 import { Redirect } from 'react-router';
+import { fetchSearchResults, searchTerm } from '../../actions';
+import CardDetails from '../../components/cardDetails/cardDetails';
 import CardsGrid from '../../components/cardsGrid';
 function SearchResultsPage(props) {
-    const [term, setTerm] = useState("programming");
 
     const [debouncedTerm, setDebouncedTerm] = useState(props.searchTerm);
 

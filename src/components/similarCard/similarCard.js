@@ -9,7 +9,7 @@ export function SimilarCard({details}) {
             <Image src={details.backdrop_path}/>
             <Details>
                 <Title>{details.title}</Title>
-                <Year>{details.release_date.slice(0,4)}</Year>
+                {details.release_date && <Year>{details.release_date.slice(0,4)}</Year>}
                 <Description>{details.overview}{details.overview}</Description>
             </Details>
         </Card>

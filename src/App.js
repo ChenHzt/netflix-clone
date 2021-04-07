@@ -15,6 +15,7 @@ import { connect } from 'react-redux';
 import { currentUser } from './actions';
 import Navbar from './components/navbar/navbar';
 import watchList from './pages/watchList';
+import PlayVideoPage from './pages/playVideo';
 
 
 class App extends React.Component {
@@ -58,8 +59,8 @@ class App extends React.Component {
         {
           this.props.searchTerm && <Redirect to='/search'/>
         }
-
         <Route path="/myList" exact component={watchList} />
+        <Route path="/watch/:id" exact component={PlayVideoPage} />
         <Route path="/search" exact component={SearchResultsPage} />
         <Route path="/signup" exact component={Signup} />
         <Route path="/login" exact component={Login} />

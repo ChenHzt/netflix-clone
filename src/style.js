@@ -77,6 +77,17 @@ export const NavLink = styled(Link)`
     &:hover{
         background-color:#2F2F2F;
     }
+`
 
- 
+export const CloseBtn = styled.button`
+    background-color: red;
+    border:none;
+    outline:none;
+    border-radius:50%;
+    position:absolute;
+    top:5em;
+    right:5em;
+    height:2rem;
+    width:2rem;
+    z-index:20
 `
