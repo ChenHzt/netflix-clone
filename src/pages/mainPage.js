@@ -11,8 +11,12 @@ class MainPage extends React.Component {
         await this.props.currentProfile(JSON.parse(sessionStorage.getItem('currentProfile')));
         await this.props.mostPopularMovies();
         await this.props.moviesByGenresAction();
-        await this.props.fetchCastomizedMoviesList(this.props.user.uid,this.props.profile.id);
-        await this.props.fetchCurrentProfileStartedWatching(this.props.user.uid,this.props.profile.id);
+        console.log(this.props);
+        if(this.props.profile){
+            await this.props.fetchCastomizedMoviesList(this.props.user.uid,this.props.profile.id);
+            await this.props.fetchCurrentProfileStartedWatching(this.props.user.uid,this.props.profile.id);
+        }
+      
     }
 
     render() {

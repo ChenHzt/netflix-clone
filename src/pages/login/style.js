@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import ConditionalLink from '../../components/condotionalLink'
 import { Link } from "react-router-dom";
 
 export const PageBackground = styled.div`
@@ -83,7 +84,7 @@ export const Input = (props) =>{
     )
 }
 
-export const PrimaryBtn = styled(Link)`
+export const PrimaryBtn = styled.button`
     background-color: #E50914;
     padding:10px 0;
     font-weight:bold;
@@ -103,7 +104,7 @@ export const PrimaryBtn = styled(Link)`
     }
 `
 
-export const SecondaryBtn = styled(Link)`
+export const SecondaryBtn = styled.button`
     background-color: transparent;
     padding:10px 0;
     border-radius:5px;
