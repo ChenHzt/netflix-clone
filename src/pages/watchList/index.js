@@ -1,17 +1,17 @@
 import CardsGrid from '../../components/cardsGrid'
 import { connect } from 'react-redux';
 import React,{useEffect,useState} from 'react';
-import {fetchCurrentProfileWatchList }from '../../actions'
+import {currentUser,fetchCurrentProfileWatchList }from '../../actions'
 import CardDetails from '../../components/cardDetails/cardDetails'
 function WatchList(props) {
-  
-
+    
     useEffect( () => {
         const getData = async() =>{
-            await props.fetchCurrentProfileWatchList(props.user.uid,props.profile.id);
+            if(props.user && props.profile)
+                await props.fetchCurrentProfileWatchList(props.user.uid,props.profile.id);
         }
         getData();
-      }, []);
+      }, [props.user,props.profile]);
 
     return (
         <CardsGrid>

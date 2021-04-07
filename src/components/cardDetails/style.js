@@ -4,13 +4,17 @@ export const Card = styled.div`
     display:flex;
     flex-direction:column;
     align-items:center;
-    height:${props => props.isHovered ? '250px' : '150px'};
+    height:${props => props.isHovered ? '300px' : '150px'};
     transform: ${props => props.isHovered? 'translateY(-50px)':'translateY(0px)'};
 
     margin:0 10px;
     padding:5px;
-    width:${props => props.isHovered ? 'calc(100vw/3 + 50px)' : 'calc(100vw/3)'};
+    width:${props => props.isHovered ? 'calc(100vw/2 + 50px)' : 'calc(100vw/3)'};
     padding:10px;
+    @media(min-width:500px){
+        width:${props => props.isHovered ? 'calc(100vw/3 + 50px)' : 'calc(100vw/4)'};
+
+    }
     @media(min-width:800px){
         width:${props => props.isHovered ? 'calc(100vw/4 + 50px)' : 'calc(100vw/4)'};
 
