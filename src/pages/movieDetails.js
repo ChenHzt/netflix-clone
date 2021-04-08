@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import {fetchActorSearchResults} from '../actions'
 import '../App.css';
 import { SimilarCard } from '../components/similarCard/similarCard';
 import YouTubePlayer from '../components/youTubePlayer';
@@ -53,14 +55,16 @@ function MovieDetails(props) {
                 <p>{props.currentDisplayed.overview}</p>
 
                 <div className="">
-                    <p>Cast: {props.currentDisplayed.credits.cast && props.currentDisplayed.credits.cast.slice(0, 4).map(actor => <span>{actor.name}, </span>)}</p>
+                    <p>Cast: {props.currentDisplayed.credits.cast && props.currentDisplayed.credits.cast.slice(0, 4).map(actor => <Link  to={`actorSearch/${actor.id}`}>{actor.name}, </Link>)}</p>
                     <p>Genres: {props.currentDisplayed.genres.map(genre => <span>{genre.name}, </span>)}</p>
                 </div>
                 <hr/>
                 <p>More Like This</p>
+                {props.currentDisplayed.similar.results.length>0 &&
                 <StyledSimilarsContainer>
                     {props.currentDisplayed.similar.results.map((similar) => <SimilarCard details={similar} />)}
                 </StyledSimilarsContainer>
+                }
             </div>
         </div>
     )
@@ -72,5 +76,5 @@ const mapStateToProps = state => {
     return { currentDisplayed: state.currentDisplayed };
 };
 
-export default connect(mapStateToProps)(MovieDetails);
+export default connect(mapStateToProps,{fetchActorSearchResults})(MovieDetails);
 

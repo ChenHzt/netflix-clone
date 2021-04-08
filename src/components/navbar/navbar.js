@@ -35,8 +35,8 @@ function Navbar(props) {
 
                                 </DropDown>
                                 <StyledNavLink to='/myList'>My List</StyledNavLink>
-                                <StyledNavLink to='/browseMovies'>Movies</StyledNavLink>
-                                <StyledNavLink to='/browseTvShows'>TV Shows</StyledNavLink>
+                                {/* <StyledNavLink to='/browseMovies'>Movies</StyledNavLink> */}
+                                {/* <StyledNavLink to='/browseTvShows'>TV Shows</StyledNavLink> */}
                                 <SearchField onSearchChange={props.onSearchChange} />
                             </>
                         }

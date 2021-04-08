@@ -5,7 +5,7 @@ import { fetchSearchResults, searchTerm } from '../../actions';
 import CardDetails from '../../components/cardDetails/cardDetails';
 import CardsGrid from '../../components/cardsGrid';
 function SearchResultsPage(props) {
-
+    console.log(props);
     const [debouncedTerm, setDebouncedTerm] = useState(props.searchTerm);
 
     useEffect(() => {
@@ -27,7 +27,7 @@ function SearchResultsPage(props) {
         console.log(props.searchResults)
       }, [debouncedTerm]);
 
-    
+    console.log(props);
     return (
         <CardsGrid>
             {!props.searchTerm && <Redirect to='/browse'/> }

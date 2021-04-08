@@ -1,17 +1,21 @@
 import styled from "styled-components";
 
 export const StyledDropDownContainer = styled("div")`
-  width: 10em;
+  width: fit-content;
   margin: 0 auto;
   border:1px solid white;
   cursor:pointer;
-
+  
 `;
 
 export const StyledDropDownHeader = styled("div")`
   // margin-bottom: 0.8em;
   font-weight:bold;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
+  @media(max-width:700px){
+    width:2.5em;
+    overflow:hidden;
+  }
 `;
 
 export const StyledDropDownListContainer = styled("div")`
@@ -21,13 +25,7 @@ export const StyledDropDownListContainer = styled("div")`
 `;
 
 export const StyledDropDownList = styled("ul")`
-  // padding: 0;
-  // margin: 0;
-  // padding-left: 1em;
-  // box-sizing: border-box;
 
-  // font-size: 1.3rem;
-  // font-weight: 500;
   &:first-child {
     padding-top: 0.8em;
   }
@@ -36,7 +34,9 @@ export const StyledDropDownList = styled("ul")`
 export const StyledListItem = styled("li")`
   list-style: none;
   margin-bottom: 0.8em;
+  color:#737373;
+  background-color: #2F2F2F;
   &:hover {
-    color: #fd9e46;
+    color: white;
   }
 `;

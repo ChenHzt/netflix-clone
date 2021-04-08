@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { RoundBtn,ToggleButton } from '../../style'
-import { CardImg, ButtonsContainer, Title, Card } from './style'
-import { currentDisplayedDetails, addToCurrentProfileStartedWatchingList, addToCurrentProfileWatchList } from '../../actions'
-import { connect } from 'react-redux';
 import Modal from 'react-modal';
-import MovieDetails from '../../pages/movieDetails';
-import {firestore} from '../../firebase';
+import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
+import { addToCurrentProfileStartedWatchingList, addToCurrentProfileWatchList, currentDisplayedDetails } from '../../actions';
+import MovieDetails from '../../pages/movieDetails';
+import { RoundBtn } from '../../style';
+import { ButtonsContainer, Card, CardImg, Title } from './style';
 const customStyles = {
     content: {
         top: '50%',
@@ -19,7 +18,8 @@ const customStyles = {
         borderRadius: '10px',
         marginRight: '-50%',
         height: 'fit-content',
-        width: '80%',
+        width: '60%',
+        minWidth:'400px',
         transform: 'translate(-50%, -50%)',
     },
     overlay: {

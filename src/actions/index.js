@@ -136,3 +136,12 @@ export const fetchCastomizedMoviesList = (userId, profileId) => async dispatch =
   console.log(result);
   dispatch({ type: 'CUSTOMISED_MOVIES_LIST', payload: result });
 }
+
+export const fetchActorSearchResults = (actorId) => async dispatch => {
+  const str = `/discover/movie?api_key=${api_key}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_crew=${actorId}`;
+  // const response = await axios.get(`/search/movie?api_key=${api_key}&language=en-US&sort_by=popularity.desc&query=${search.replace(' ', '%20')}&include_adult=false`);
+  console.log(str);
+  const response = await axios.get(str);
+  console.log(response);
+  dispatch({ type: 'SEARCH_RESULTS', payload: response.data.results });
+}
