@@ -11,8 +11,18 @@ export const RoundBtn = styled.button`
     align-items:center;
     border: 2px white solid;
     background-color:transparent;
+    outline:none;
+
     color:white;
-    margin:5px
+    margin:5px;
+    &:hover{
+        background-color:white;
+        color:black;
+    }
+
+    &:active{
+        transform: translateY(-3px);
+    }
 `
 
 export const RectengleBtn = styled.button`
