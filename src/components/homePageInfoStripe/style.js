@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Section = styled.div`
+export const StyledSection = styled.div`
     display:flex;
     flex-direction:${props => props.direction};
     align-items: center;
@@ -16,24 +16,24 @@ export const Section = styled.div`
     }
 `
 
-export const InfoSide = styled.div`
+export const StyledInfoSide = styled.div`
     width:50%;
     @media(max-width:500px){
         margin:10px 0;
         width:90%;
     }
 `
-export const MediaSide = styled.video`
+export const StyledMediaSide = styled.video`
     width:35%;
     @media(max-width:500px){
         width:90%;
     }
 `
-export const Headline = styled.p`
+export const StyledHeadline = styled.p`
     font-size: 2.5rem;
     margin: 10px 0;
 `
-export const Info = styled.p`
+export const StyledInfo = styled.p`
     font-size: 1.25rem; 
 `
 

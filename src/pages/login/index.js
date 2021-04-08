@@ -3,13 +3,12 @@ import { auth, signInWithGoogle } from "../../firebase";
 import React, { useState } from 'react';
 import { PageBackground, Box, Overlay, Headline, FormItem, Input, PrimaryBtn, SecondaryBtn,Text } from './style';
 import { Link, Redirect } from "react-router-dom";
-import {Logo,Navbar} from '../../style'
-import styled from "styled-components";
+
 
 export default function SignupPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('ok');
+    const [error, setError] = useState('');
     const [redirect, setRedirect] = useState(null);
 
     const signInWithEmailAndPasswordHandler = async (event) => {
@@ -23,9 +22,8 @@ export default function SignupPage() {
             console.error("Error signing in with password and email", error);
         }
         return !!userCredential;
-     
-        
     };
+
     const loginWithEmailAndPassword = async () =>{
         const status = await signInWithEmailAndPasswordHandler();
         if(status) setRedirect('/browse');
@@ -63,7 +61,6 @@ export default function SignupPage() {
 
     return (
         <PageBackground src='https://assets.nflxext.com/ffe/siteui/vlv3/92bb3a0b-7e91-40a0-b27b-f2c3ac9ef6e4/ab38bb40-7ffb-44a0-b628-90803ccd534b/IL-en-20210322-popsignuptwoweeks-perspective_alpha_website_small.jpg'>
-            {console.log(redirect)}
             {redirect ? <Redirect to={redirect}/> : null}
             <Overlay>
                 <Box>

@@ -24,10 +24,8 @@ function SearchResultsPage(props) {
             await props.fetchSearchResults(props.searchTerm);
         }
         if (debouncedTerm) search();
-        console.log(props.searchResults)
       }, [debouncedTerm]);
 
-    console.log(props);
     return (
         <CardsGrid>
             {!props.searchTerm && <Redirect to='/browse'/> }
@@ -37,7 +35,6 @@ function SearchResultsPage(props) {
 }
 
 const mapStateToProps = state => {
-    console.log(state);
     return {
         searchTerm: state.searchTerm,
         searchResults:state.searchResults

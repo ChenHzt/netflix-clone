@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Card = styled.div`
+export const StyledCard = styled.div`
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -30,7 +30,7 @@ export const Card = styled.div`
     
 `
 
-export const CardImg = styled.div`
+export const StyledCardImg = styled.div`
 background:url(https://image.tmdb.org/t/p/original${props => props.src}) no-repeat center center/cover;
 height:100%;
 width:100%;
@@ -38,7 +38,7 @@ border-radius:3px;
 margin:4px;
 `
 
-export const ButtonsContainer = styled.div`
+export const StyledButtonsContainer = styled.div`
     display:flex;
     flex-direction:row;
     // justify-content:center;
@@ -46,7 +46,7 @@ export const ButtonsContainer = styled.div`
     
 `
 
-export const Title = styled.p`
+export const StyledTitle = styled.p`
     min-height:1.5rem;
     width:80%;
     text-overflow: ellipsis;

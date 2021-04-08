@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Jumbo = styled.div`
+export const StyledJumbo = styled.div`
     width:100%;
     height:${props => props.height};
     background:url(${props => props.src}) no-repeat center center/cover;
@@ -9,7 +9,7 @@ export const Jumbo = styled.div`
     
 `
 
-export const Content = styled.div`
+export const StyledContent = styled.div`
     height: 100%;
     width: 100%;
     background-color: rgba(0,0,0,0.5);  
@@ -20,7 +20,7 @@ export const Content = styled.div`
     z-index:100;
    
 `
-export const Container = styled.div`
+export const StyledContainer = styled.div`
     height: 100%;
     width: 80%;
     display: flex;

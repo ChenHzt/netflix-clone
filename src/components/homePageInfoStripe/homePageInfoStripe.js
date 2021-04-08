@@ -1,16 +1,16 @@
 // import '../App.css';
-import {Section,InfoSide,MediaSide,Headline,Info} from './style'
+import {StyledSection,StyledInfoSide,StyledMediaSide,StyledHeadline,StyledInfo} from './style'
 
 export function HomePageInfoStripe({ headline, info, videoUrl,videoPoster, direction }) {
     return (
-            <Section direction={direction}>
-                <InfoSide>
-                    <Headline>{headline}</Headline>
-                    <Info>{info}</Info>
-                </InfoSide>
+            <StyledSection direction={direction}>
+                <StyledInfoSide>
+                    <StyledHeadline>{headline}</StyledHeadline>
+                    <StyledInfo>{info}</StyledInfo>
+                </StyledInfoSide>
                 
-                <MediaSide src={videoUrl} poster={videoPoster} autoPlay muted/>
-            </Section>
+                <StyledMediaSide src={videoUrl} poster={videoPoster} autoPlay muted/>
+            </StyledSection>
 
     )
 }

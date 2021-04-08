@@ -13,7 +13,6 @@ class ProfilesPage extends React.Component {
     }
 
     chooseProfile = (profile) =>{
-        console.log(profile);
         this.props.currentProfile(profile);
         sessionStorage.setItem('currentProfile',JSON.stringify(profile));
     }
@@ -32,7 +31,6 @@ class ProfilesPage extends React.Component {
     }
 
     renderProfilesList = () => {
-        console.log(this.props.user);
         return (
             <StyledProfilesContainer>
                 {this.props.user && this.props.user.profiles.map(this.renderProfile)}

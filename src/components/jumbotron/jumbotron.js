@@ -1,15 +1,15 @@
-import {Jumbo,Content,Container} from './style';
+import {StyledJumbo,StyledContent,StyledContainer} from './style';
 
 export default function Jumbotron(props) {
 
     return (
-        <Jumbo src={props.backgroundImg} height={props.height ? props.height :'100vh' }>
-            <Content>
-                <Container className='container'>
+        <StyledJumbo src={props.backgroundImg} height={props.height ? props.height :'100vh' }>
+            <StyledContent>
+                <StyledContainer className='container'>
                     {props.children}
 
-                </Container>
-            </Content>
-        </Jumbo>
+                </StyledContainer>
+            </StyledContent>
+        </StyledJumbo>
     )
 }

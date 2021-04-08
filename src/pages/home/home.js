@@ -3,11 +3,10 @@ import { HomePageInfoStripe } from '../../components/homePageInfoStripe/homePage
 import Jumbotron from '../../components/jumbotron/jumbotron';
 import sectionsData from '../../staticData/homePageSections.json';
 import { HorizontalRule, Logo, Navbar, NavLink, NavRight } from '../../style';
-import { Description, FlexContainer, Title } from './style';
+import { StyledDescription, StyledFlexContainer, StyledTitle } from './style';
 
 export default function HomePage() {
 
-    console.log(`I'm in home page`);
     return (
         <div className="homePage">
             <Navbar>
@@ -18,14 +17,14 @@ export default function HomePage() {
                 </NavRight>
             </Navbar>
             <Jumbotron backgroundImg={'https://assets.nflxext.com/ffe/siteui/vlv3/92bb3a0b-7e91-40a0-b27b-f2c3ac9ef6e4/ab38bb40-7ffb-44a0-b628-90803ccd534b/IL-en-20210322-popsignuptwoweeks-perspective_alpha_website_small.jpg'}>
-                <Title fontSize={'3.5rem'}>Unlimited movies, TV shows, and more.</Title>
-                <Title fontSize={'2.5rem'}>Watch anywhere. Cancel anytime.</Title>
-                <Description>Ready to watch? Enter your email to create or restart your membership.</Description>
+                <StyledTitle fontSize={'3.5rem'}>Unlimited movies, TV shows, and more.</StyledTitle>
+                <StyledTitle fontSize={'2.5rem'}>Watch anywhere. Cancel anytime.</StyledTitle>
+                <StyledDescription>Ready to watch? Enter your email to create or restart your membership.</StyledDescription>
             </Jumbotron>
-            <FlexContainer>
+            <StyledFlexContainer>
                 {
                     sectionsData.map((section) =>
-                        <div key={section.id}>
+                        <div key={'section'+section.id}>
                                 <HomePageInfoStripe
                                     headline={section.headline}
                                     info={section.info}
@@ -37,7 +36,7 @@ export default function HomePage() {
                     )
                 }
 
-            </FlexContainer>
+            </StyledFlexContainer>
 
         </div>
     )

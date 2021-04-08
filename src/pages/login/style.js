@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import ConditionalLink from '../../components/condotionalLink'
-import { Link } from "react-router-dom";
 
 export const PageBackground = styled.div`
     width:100vw;
@@ -11,9 +9,6 @@ export const PageBackground = styled.div`
 
    
 `
-
-
-
 export const Overlay = styled.div`
     width:100%;
     height:100%;

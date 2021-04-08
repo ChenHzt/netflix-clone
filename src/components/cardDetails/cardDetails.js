@@ -5,8 +5,8 @@ import { Redirect } from 'react-router';
 import { addToCurrentProfileStartedWatchingList, addToCurrentProfileWatchList, currentDisplayedDetails } from '../../actions';
 import MovieDetails from '../../pages/movieDetails';
 import { RoundBtn } from '../../style';
-import { ButtonsContainer, Card, CardImg, Title } from './style';
-const customStyles = {
+import { StyledButtonsContainer, StyledCard, StyledCardImg, StyledTitle } from './style';
+const movieDetailsModalStyle = {
     content: {
         top: '50%',
         left: '50%',
@@ -23,10 +23,8 @@ const customStyles = {
         transform: 'translate(-50%, -50%)',
     },
     overlay: {
-        // background
         backgroundColor: 'rgba(0, 0, 0, 0.75)'
     }
-
 };
 Modal.setAppElement('#root');
 
@@ -80,14 +78,14 @@ function CardDetails(props) {
         if(isHovered)
         return (
             <>
-                <Title>{props.movie.title}</Title>
-                <ButtonsContainer>
+                <StyledTitle>{props.movie.title}</StyledTitle>
+                <StyledButtonsContainer>
                     <RoundBtn onClick={() => addMovieToStartedWatchingList(props.movie)}><i className="fas fa-play"></i></RoundBtn>
                     <RoundBtn onClick={() => addMovieToProfileList(props.movie)}><i className={`fas fa-${inWatchList}`}></i></RoundBtn>
                     <RoundBtn><i className="far fa-thumbs-up"></i></RoundBtn>
                     <RoundBtn ><i className="far fa-thumbs-down"></i></RoundBtn>
                     <RoundBtn onClick={() => openDetails()}><i className="fas fa-angle-down"></i></RoundBtn>
-                </ButtonsContainer>
+                </StyledButtonsContainer>
 
             </>
         )
@@ -101,7 +99,7 @@ function CardDetails(props) {
                 isOpen={showMovieDetailsModal}
                 preventScroll={false}
                 onRequestClose={closeModal}
-                style={customStyles}
+                style={movieDetailsModalStyle}
                 contentLabel="Movie details modal">
                 <MovieDetails movie={props.movie} playVideo={() =>addMovieToStartedWatchingList(props.movie) } addMovieToProfileList={() => addMovieToProfileList(props.movie)} />
             </Modal>
@@ -122,12 +120,12 @@ function CardDetails(props) {
     
 
     return (
-        <Card onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} isHovered={isHovered} className="cardDetails">
-            <CardImg src={props.movie.backdrop_path} />
+        <StyledCard onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} isHovered={isHovered} className="cardDetails">
+            <StyledCardImg src={props.movie.backdrop_path} />
             <RenderCardIfHovered/>
             <RenderMovieDetailsModal/>
             <RenderPlayVideo/>
-        </Card>
+        </StyledCard>
     )
 }
 

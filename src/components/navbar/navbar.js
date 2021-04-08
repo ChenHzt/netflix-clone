@@ -11,41 +11,57 @@ function Navbar(props) {
         props.currentProfile(props.user.profiles[index]);
     }
 
+    const UserNotAuthenticatedLinks = (props) => {
+        if (!props.user)
+            return (
+                <>
+                    <StyledNavLink to='/signup'>Sign Up</StyledNavLink>
+                    <StyledNavLink to='/login'>Login</StyledNavLink>
+                </>
+            )
+        return <></>;
+    }
 
+    const UserAuthenticatedWithoutProfileLinks = (props) => {
+        if (props.user)
+            return (
+                <>
+                    <StyledNavLink onClick={props.handleSignout} to='/'>Sign Out</StyledNavLink>
+
+                </>
+            )
+        return <></>;
+    }
+    const UserAuthenticatedLinks = (props) => {
+        console.log(props);
+
+        if (props.user && props.profile)
+            return (
+                <>
+                    <DropDown onOptionClicked={onOptionClicked} selectedIndex={props.user.profiles.findIndex(p => { return p.id === props.profile.id })}>
+                        {
+                            props.user.profiles
+                                .map((profile) => <ProfileDropDownItem profile={profile} />)
+                        }
+
+                    </DropDown>
+                    <StyledNavLink to='/myList'>My List</StyledNavLink>
+           
+                    <SearchField onSearchChange={props.onSearchChange} />
+                    <UserAuthenticatedWithoutProfileLinks {...props} />
+                </>
+            )
+        return <></>;
+    }
+
+    console.log(props);
     return (
         <StyledNavbar>
-            <StyledLogo to={props.user ? '/browse' : '/'} src='http://assets.stickpng.com/images/580b57fcd9996e24bc43c529.png' />
+            <StyledLogo to={props.user ? '/browse' : '/'} src='/static/images/logo.png' />
             <StyledNavRight>
-                {!props.user &&
-                    <>
-                        <StyledNavLink to='/signup'>Sign Up</StyledNavLink>
-                        <StyledNavLink to='/login'>Login</StyledNavLink>
-                    </>}
-
-                {props.user &&
-                    <>
-                        {
-                            props.profile &&
-                            <>
-                                <DropDown onOptionClicked={onOptionClicked} selectedIndex={props.user.profiles.findIndex(p => { return p.id === props.profile.id })}>
-                                    {
-                                        props.user.profiles
-                                            .map((profile) => <ProfileDropDownItem profile={profile} />)
-                                    }
-
-                                </DropDown>
-                                <StyledNavLink to='/myList'>My List</StyledNavLink>
-                                {/* <StyledNavLink to='/browseMovies'>Movies</StyledNavLink> */}
-                                {/* <StyledNavLink to='/browseTvShows'>TV Shows</StyledNavLink> */}
-                                <SearchField onSearchChange={props.onSearchChange} />
-                            </>
-                        }
-                        <StyledNavLink onClick={props.handleSignout} to='/'>Sign Out</StyledNavLink>
-
-                    </>}
-
+                <UserNotAuthenticatedLinks {...props} />
+                <UserAuthenticatedLinks {...props} />
             </StyledNavRight>
-            
         </StyledNavbar>
     )
 
@@ -58,4 +74,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps, { currentProfile,createNewProfile })(Navbar);
+export default connect(mapStateToProps, { currentProfile, createNewProfile })(Navbar);

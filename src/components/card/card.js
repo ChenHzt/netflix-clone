@@ -1,11 +1,11 @@
 // import '../App.css';
 import React from 'react';
-import {CardDiv} from './style'
+import {StyledCardDiv} from './style'
 
 export default function Card({movie}) {
 
     return (
-        <CardDiv movie={movie}/>
+        <StyledCardDiv movie={movie}/>
     )
 }
 
