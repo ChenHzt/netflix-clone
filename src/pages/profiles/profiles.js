@@ -18,6 +18,8 @@ class ProfilesPage extends React.Component {
         sessionStorage.setItem('currentProfile',JSON.stringify(profile));
     }
 
+    
+
     renderProfile = (p) =>{
         return (
             <StyledProfileCard to='/browse' key={p.id} onClick={() => this.chooseProfile1(p) } className="profileCard">

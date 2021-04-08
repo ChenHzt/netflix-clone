@@ -1,6 +1,7 @@
+/* eslint-disable no-unused-expressions */
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { currentProfile, fetchCastomizedMoviesList, fetchCurrentProfileStartedWatching, mostPopularMovies, moviesByGenresAction } from '../actions';
+import { currentProfile,fetchCurrentProfileWatchList, fetchCastomizedMoviesList, fetchCurrentProfileStartedWatching, mostPopularMovies, moviesByGenresAction } from '../actions';
 import '../App.css';
 import CardStripe from '../components/cardsStripe';
 import ProfilePage from './profiles/profiles';
@@ -10,13 +11,14 @@ function MainPage(props) {
         if (props.profile) {
             await props.fetchCastomizedMoviesList(props.user.uid, props.profile.id);
             await props.fetchCurrentProfileStartedWatching(props.user.uid, props.profile.id);
+            await props.fetchCurrentProfileWatchList(props.user.uid, props.profile.id);
         }
     }
 
     const initializeData = async () => {
         await props.currentProfile(JSON.parse(sessionStorage.getItem('currentProfile')));
-        await props.mostPopularMovies();
-        await props.moviesByGenresAction();
+        props.popularMovies.length >0 ? null: await props.mostPopularMovies();
+        props.moviesByGenres.length >0? null: await props.moviesByGenresAction();
         await getCustomProfileMoviesData()
     }
 
@@ -43,13 +45,11 @@ function MainPage(props) {
                     {
                         props.castomizedMoviesLists
                             .map((moviesList) => {
-                                console.log(moviesList);
                                 return <CardStripe caruselType='loop' movies={moviesList.moviesList} title={`${moviesList.title} movies`}></CardStripe>
                             })
                     }
                     {
                         props.moviesByGenres
-                            .sort(() => 0.5 - Math.random())
                             .map((movies) => {
                                 return <CardStripe caruselType='loop' movies={movies.movies} title={`${movies.genre.name} movies`}></CardStripe>
                             })
@@ -71,8 +71,9 @@ const mapStateToProps = state => {
         popularMovies: state.popularMovies,
         moviesByGenres: state.moviesByGenres,
         startedWatching: state.startedWatching,
-        castomizedMoviesLists: state.castomizedMoviesLists
+        castomizedMoviesLists: state.castomizedMoviesLists,
+        watchList:state.watchList
     };
 };
 
-export default connect(mapStateToProps, { fetchCastomizedMoviesList, mostPopularMovies, moviesByGenresAction, currentProfile, fetchCurrentProfileStartedWatching })(MainPage);
+export default connect(mapStateToProps, { fetchCurrentProfileWatchList,fetchCastomizedMoviesList, mostPopularMovies, moviesByGenresAction, currentProfile, fetchCurrentProfileStartedWatching })(MainPage);

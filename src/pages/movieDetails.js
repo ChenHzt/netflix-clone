@@ -39,12 +39,12 @@ function MovieDetails(props) {
             <ShowCaseSection/>
             <StyledBtnsContainer>
                 <RectengleBtn onClick={props.playVideo}>
-                    <i class="fas fa-play"></i>
+                    <i className="fas fa-play"></i>
                     <span>Play</span>
                 </RectengleBtn>
-                <RoundBtn onClick={props.addMovieToProfileList}><i class="fas fa-plus"></i></RoundBtn>
-                <RoundBtn><i class="far fa-thumbs-up"></i></RoundBtn>
-                <RoundBtn><i class="far fa-thumbs-down"></i></RoundBtn>
+                <RoundBtn onClick={props.addMovieToProfileList}><i className={`fas fa-${props.inWatchList? 'check':'plus'}`}></i></RoundBtn>
+                <RoundBtn><i className="far fa-thumbs-up"></i></RoundBtn>
+                <RoundBtn><i className="far fa-thumbs-down"></i></RoundBtn>
             </StyledBtnsContainer>
 
             <div className="">

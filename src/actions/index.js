@@ -4,6 +4,21 @@ import { firestore } from '../firebase'
 
 const api_key = '2fccd7c26288d8a6ba121a000c6df8ec';
 
+
+const addDocumentToFirestore = async (pathToCollection,collectionName,newDocumentId,newDocument) => {
+  const docRef = firestore.doc(`${pathToCollection}/${collectionName}/${newDocumentId}`);
+  const snapshot = await docRef.get();
+  let flag = false; 
+  if (!snapshot.exists) {
+    await docRef.set({
+      ...newDocument
+    });
+    flag=true;
+  }
+  return flag;
+}
+
+
 // Action creator
 export const currentUser = user => {
   // Return an action
@@ -21,6 +36,12 @@ export const currentProfile = profile => {
     payload: profile
   };
 };
+
+export const createNewProfile = (userId,profile) => async dispatch => {
+  const newDoc = await firestore.collection(`users/${userId}/profiles`).add(profile);
+  dispatch({ type: 'CREATE_NEW_PROFILE', payload: newDoc });
+  
+}
 
 export const mostPopularMovies = () => async dispatch => {
   const response = await axios.get(`/discover/movie?api_key=${api_key}&language=en-US&sort_by=popularity.desc&include_adult=false&page=1`);
@@ -55,18 +76,7 @@ export const moviesByGenresAction = () => async dispatch => {
   dispatch({ type: `FETCH_MOVIES_BY_GENRE`, payload: movies });
 };
 
-const addDocumentToFirestore = async (pathToCollection,collectionName,newDocumentId,newDocument) => {
-  const docRef = firestore.doc(`${pathToCollection}/${collectionName}/${newDocumentId}`);
-  const snapshot = await docRef.get();
-  if (!snapshot.exists) {
-    await docRef.set({
-      ...newDocument
-    });
-  }
-  const newDoc = await docRef.get();
-  console.log(newDoc);
-  return newDoc;
-}
+
 
 export const searchTerm = search => {
   // Return an action
@@ -91,8 +101,9 @@ export const fetchCurrentProfileWatchList = (userId, profileId) => async dispatc
 }
 
 export const addToCurrentProfileWatchList = (userId, profileId,movie) => async dispatch => {
-  addDocumentToFirestore(`users/${userId}/profiles/${profileId}`,'watchList',movie.id,movie);
-  dispatch({ type: 'ADD_TO_WATCH_LIST', payload: movie });
+  const isAdded = await addDocumentToFirestore(`users/${userId}/profiles/${profileId}`,'watchList',movie.id,movie);
+  const temp = isAdded?'ADD_TO_WATCH_LIST' :'DO_NOTHING';
+  dispatch({ type:temp, payload: movie });
 }
 
 export const fetchCurrentProfileStartedWatching = (userId, profileId) => async dispatch => {

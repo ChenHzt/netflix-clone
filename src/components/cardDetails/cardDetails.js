@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { RoundBtn } from '../../style'
+import { RoundBtn,ToggleButton } from '../../style'
 import { CardImg, ButtonsContainer, Title, Card } from './style'
 import { currentDisplayedDetails, addToCurrentProfileStartedWatchingList, addToCurrentProfileWatchList } from '../../actions'
 import { connect } from 'react-redux';
 import Modal from 'react-modal';
 import MovieDetails from '../../pages/movieDetails';
-import YTPlayer from '../ytplayer';
-import YouTubePlayer from '../youTubePlayer';
+import {firestore} from '../../firebase';
 import { Redirect } from 'react-router';
 const customStyles = {
     content: {
@@ -39,7 +38,6 @@ function CardDetails(props) {
     const closeModal = () => {
         setShowMovieDetailsModal(false);
         setIsHovered(false);
-
     };
 
     const openDetails = async () => {
@@ -47,6 +45,14 @@ function CardDetails(props) {
         setShowMovieDetailsModal(true);
         sessionStorage.setItem('currentDisplayed', JSON.stringify(props.currentDisplayed));
     }
+
+    
+    const isInWatchList =  () => {
+        const temp =  props.watchList.some((movie) => movie.id === props.movie.id)
+        return temp;
+    }
+
+    const inWatchList = isInWatchList()?'check':'plus';
 
     const addMovieToProfileList = async (movie) => {
         try {
@@ -77,7 +83,7 @@ function CardDetails(props) {
                 <Title>{props.movie.title}</Title>
                 <ButtonsContainer>
                     <RoundBtn onClick={() => addMovieToStartedWatchingList(props.movie)}><i className="fas fa-play"></i></RoundBtn>
-                    <RoundBtn onClick={() => addMovieToProfileList(props.movie)}><i className="fas fa-plus"></i></RoundBtn>
+                    <RoundBtn onClick={() => addMovieToProfileList(props.movie)}><i className={`fas fa-${inWatchList}`}></i></RoundBtn>
                     <RoundBtn><i className="far fa-thumbs-up"></i></RoundBtn>
                     <RoundBtn ><i className="far fa-thumbs-down"></i></RoundBtn>
                     <RoundBtn onClick={() => openDetails()}><i className="fas fa-angle-down"></i></RoundBtn>
@@ -113,6 +119,8 @@ function CardDetails(props) {
 
     }
 
+    
+
     return (
         <Card onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} isHovered={isHovered} className="cardDetails">
             <CardImg src={props.movie.backdrop_path} />
@@ -125,7 +133,7 @@ function CardDetails(props) {
 
 
 const mapStateToProps = state => {
-    return { currentDisplayed: state.currentDisplayed, user: state.currentUser, profile: state.currentProfile };
+    return { currentDisplayed: state.currentDisplayed, user: state.currentUser, profile: state.currentProfile,watchList:state.watchList };
 };
 
 export default connect(

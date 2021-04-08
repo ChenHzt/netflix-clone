@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
 export const StyledDropDownContainer = styled("div")`
-  width: 7em;
+  width: 10em;
   margin: 0 auto;
   border:1px solid white;
+  cursor:pointer;
 
 `;
 
@@ -16,7 +17,7 @@ export const StyledDropDownHeader = styled("div")`
 export const StyledDropDownListContainer = styled("div")`
   position: absolute;
   z-index: 100;
-  width: 7em;
+  width: 10em;
 `;
 
 export const StyledDropDownList = styled("ul")`

@@ -79,15 +79,63 @@ export const NavLink = styled(Link)`
     }
 `
 
-export const CloseBtn = styled.button`
-    background-color: red;
-    border:none;
-    outline:none;
-    border-radius:50%;
-    position:absolute;
-    top:5em;
-    right:5em;
-    height:2rem;
-    width:2rem;
-    z-index:20
+export const ToggleBtnCheckBox = styled.input.attrs({ type: 'checkbox' })`
+    height: 0;
+    width: 0;
+    visibility: hidden;
+
+    &:checked + label {
+    &:after {
+        transform: scale(4.2);
+        } 
+    }
 `
+
+export const ToggleBtnLabel = styled.label`
+    outline: none;
+    user-select: none;
+    color: $color-dark;
+    font-family: 'Lato', sans-serif;
+    font-size: 2.5rem;
+    letter-spacing: 0.04rem;
+    padding: 1.5rem 3rem;
+    cursor: pointer;
+    border-radius: .4rem;
+    border: .3rem solid $color-dark;
+    background: $color-light;
+    position: relative;
+    overflow: hidden;
+
+    &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%; 
+    top: 0;
+    left: 0;
+    transform: scale(0);
+    transition: transform $dur ease-in;
+    mix-blend-mode: difference;
+    background: radial-gradient(
+        circle at center, 
+        $color-light 24%, 
+        $color-dark 25%, 
+        $color-dark 100%);
+    }     
+
+    box-shadow: 0 3px 0 0 $color-dark;
+    &:active {
+        top: 3px;
+        box-shadow: none;
+    }
+
+`
+
+export function ToggleButton(props){
+    return (
+        <>
+            <ToggleBtnCheckBox id='cb'/>
+            <ToggleBtnLabel for='cb' />
+        </>
+    )
+} 
