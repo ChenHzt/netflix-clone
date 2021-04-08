@@ -6,18 +6,19 @@ import '../App.css';
 import CardStripe from '../components/cardsStripe';
 import ProfilePage from './profiles/profiles';
 import { cacheImages } from '../utils';
-import { FlapperSpinner  } from 'react-spinners-kit';
+import { FlapperSpinner } from 'react-spinners-kit';
+import { LoaderWrapper } from '../components/loaderWrapper';
 
 function MainPage(props) {
     const [isLoading, setIsLoading] = useState(false);
 
     const getCustomProfileMoviesData = async () => {
         if (props.profile) {
-            setIsLoading(true);
+            // setIsLoading(true);
             await props.fetchCastomizedMoviesList(props.user.uid, props.profile.id);
             await props.fetchCurrentProfileStartedWatching(props.user.uid, props.profile.id);
             await props.fetchCurrentProfileWatchList(props.user.uid, props.profile.id);
-            setIsLoading(false);
+            // setIsLoading(false);
         }
     }
 
@@ -46,42 +47,36 @@ function MainPage(props) {
 
 
     return (
-        <>
-            {isLoading && 
-             <FlapperSpinner 
-             size={30}
-             color="#686769"
-             loading={isLoading}
-         />}
-            {!isLoading &&
-                <div className="mainPage">
-                    {
-                        props.profile &&
-                        <div className="">
 
-                            {props.startedWatching.length ? <CardStripe caruselType='slide' movies={props.startedWatching} title="continue watching"></CardStripe> : null}
+        <LoaderWrapper isLoading={isLoading}>
+            <div className="mainPage">
+                {
+                    props.profile &&
+                    <div className="">
 
-                            <CardStripe caruselType='loop' movies={props.popularMovies} title="popular movies"></CardStripe>
+                        {props.startedWatching.length ? <CardStripe caruselType='slide' movies={props.startedWatching} title="continue watching"></CardStripe> : null}
 
-                            {
-                                props.castomizedMoviesLists
-                                    .map((moviesList) => {
-                                        return <CardStripe caruselType='loop' movies={moviesList.moviesList} title={`${moviesList.title} movies`}></CardStripe>
-                                    })
-                            }
-                            {
-                                props.moviesByGenres
-                                    .map((movies) => {
-                                        return <CardStripe caruselType='loop' movies={movies.movies} title={`${movies.genre.name} movies`}></CardStripe>
-                                    })
-                            }
+                        <CardStripe caruselType='loop' movies={props.popularMovies} title="popular movies"></CardStripe>
 
-                        </div>
-                    }
-                    {!props.profile && <ProfilePage />}
+                        {
+                            props.castomizedMoviesLists
+                                .map((moviesList) => {
+                                    return <CardStripe caruselType='loop' movies={moviesList.moviesList} title={`${moviesList.title} movies`}></CardStripe>
+                                })
+                        }
+                        {
+                            props.moviesByGenres
+                                .map((movies) => {
+                                    return <CardStripe caruselType='loop' movies={movies.movies} title={`${movies.genre.name} movies`}></CardStripe>
+                                })
+                        }
 
-                </div>}
-        </>
+                    </div>
+                }
+                {!props.profile && <ProfilePage />}
+
+            </div>
+        </LoaderWrapper>
     )
 
 }
