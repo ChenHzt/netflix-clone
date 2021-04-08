@@ -33,6 +33,8 @@ function CardDetails(props) {
     const [showMovieDetailsModal, setShowMovieDetailsModal] = useState(false);
     const [playVideo, setPlayVideo] = useState(false);
 
+    
+
     const closeModal = () => {
         setShowMovieDetailsModal(false);
         setIsHovered(false);

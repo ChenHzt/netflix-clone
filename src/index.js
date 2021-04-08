@@ -7,14 +7,15 @@ import thunk from 'redux-thunk';
 import App from './App';
 import reducers from './reducers';
 import reportWebVitals from './reportWebVitals';
-// import { composeWithDevTools } from 'redux-devtools-extension';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { Normalize } from 'styled-normalize'
 
-const store = createStore(reducers, applyMiddleware(thunk));
+const store = createStore(reducers,composeWithDevTools( applyMiddleware(thunk)));
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-    
-        <App />
+      <Normalize />
+      <App />
       
     </Provider>
   </React.StrictMode>,

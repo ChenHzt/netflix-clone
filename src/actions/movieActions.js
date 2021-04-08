@@ -83,7 +83,7 @@ export const mostPopularMovies = () => async dispatch => {
   
   export const fetchCurrentProfileStartedWatching = (userId, profileId) => async dispatch => {
     const snapshot = await firestore.collection(`users/${userId}/profiles/${profileId}/startedWatching`).get();
-    const moviesList = snapshot.docs.map(doc => {console.log(doc); return { ...doc.data() } });
+    const moviesList = snapshot.docs.map(doc => { return { ...doc.data() } });
   
     dispatch({ type: 'STARTED_WATCHING_LIST', payload: moviesList });
   }
